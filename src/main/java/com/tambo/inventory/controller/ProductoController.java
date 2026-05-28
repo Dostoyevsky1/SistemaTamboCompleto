@@ -1,20 +1,17 @@
 package com.tambo.inventory.controller;
 
 import com.tambo.inventory.dto.ApiResponse;
-import com.tambo.inventory.dto.ProductoRequest;
-import com.tambo.inventory.dto.ProductoResponse;
+import com.tambo.inventory.dto.ProductoDTO;
 import com.tambo.inventory.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")
 public class ProductoController {
 
     private final ProductoService productoService;
@@ -24,54 +21,39 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
-    public ResponseEntity<List<ProductoResponse>> obtenerTodos() {
-        List<ProductoResponse> productos = productoService.obtenerTodos();
+    @GetMapping("/api/productos")
+    public ResponseEntity<List<ProductoDTO>> listarProductos() {
+        List<ProductoDTO> productos = productoService.listarActivos();
         return ResponseEntity.ok(productos);
     }
 
-    @GetMapping("/activos")
-    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
-    public ResponseEntity<List<ProductoResponse>> obtenerActivos() {
-        List<ProductoResponse> productos = productoService.obtenerActivos();
+    @GetMapping("/api/productos/buscar")
+    public ResponseEntity<List<ProductoDTO>> buscarProductos(@RequestParam("nombre") String nombre) {
+        List<ProductoDTO> productos = productoService.buscarPorNombre(nombre);
         return ResponseEntity.ok(productos);
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
-    public ResponseEntity<ProductoResponse> obtenerPorId(@PathVariable Long id) {
-        ProductoResponse producto = productoService.obtenerPorId(id);
+    @GetMapping("/api/productos/{id}")
+    public ResponseEntity<ProductoDTO> obtenerProductoPorId(@PathVariable Long id) {
+        ProductoDTO producto = productoService.obtenerPorId(id);
         return ResponseEntity.ok(producto);
     }
 
-    @GetMapping("/sku/{sku}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
-    public ResponseEntity<ProductoResponse> obtenerPorSku(@PathVariable String sku) {
-        ProductoResponse producto = productoService.obtenerPorSku(sku);
-        return ResponseEntity.ok(producto);
-    }
-
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
-        ProductoResponse creado = productoService.crear(request);
+    @PostMapping("/admin/productos")
+    public ResponseEntity<ProductoDTO> crearProducto(@Valid @RequestBody ProductoDTO productoDTO) {
+        ProductoDTO creado = productoService.crear(productoDTO);
         return new ResponseEntity<>(creado, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ProductoResponse> actualizar(
-            @PathVariable Long id,
-            @Valid @RequestBody ProductoRequest request) {
-        ProductoResponse actualizado = productoService.actualizar(id, request);
+    @PutMapping("/admin/productos/{id}")
+    public ResponseEntity<ProductoDTO> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoDTO productoDTO) {
+        ProductoDTO actualizado = productoService.actualizar(id, productoDTO);
         return ResponseEntity.ok(actualizado);
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse> eliminar(@PathVariable Long id) {
+    @DeleteMapping("/admin/productos/{id}")
+    public ResponseEntity<ApiResponse> eliminarProducto(@PathVariable Long id) {
         productoService.eliminar(id);
-        return ResponseEntity.ok(new ApiResponse(true, "Producto eliminado exitosamente."));
+        return ResponseEntity.ok(new ApiResponse(true, "Producto eliminado exitosamente (baja lógica)."));
     }
 }

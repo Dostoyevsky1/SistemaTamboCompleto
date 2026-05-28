@@ -22,7 +22,7 @@ public class Usuario {
     private String nombre;
 
     @Column(unique = true, nullable = false)
-    private String email;
+    private String correo;
 
     @Column(nullable = false)
     private Boolean activo = true;
@@ -35,22 +35,17 @@ public class Usuario {
     )
     private Set<Rol> roles = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sucursal_id")
-    private Sucursal sucursal;
-
     public Usuario() {
     }
 
-    public Usuario(Long id, String username, String password, String nombre, String email, Boolean activo, Set<Rol> roles, Sucursal sucursal) {
+    public Usuario(Long id, String username, String password, String nombre, String correo, Boolean activo, Set<Rol> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.nombre = nombre;
-        this.email = email;
+        this.correo = correo;
         this.activo = activo;
         this.roles = roles;
-        this.sucursal = sucursal;
     }
 
     public Long getId() {
@@ -85,12 +80,12 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public Boolean getActivo() {
@@ -107,13 +102,5 @@ public class Usuario {
 
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
-    }
-
-    public Sucursal getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
     }
 }

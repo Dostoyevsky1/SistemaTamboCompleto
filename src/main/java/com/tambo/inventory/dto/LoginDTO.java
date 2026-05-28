@@ -2,7 +2,7 @@ package com.tambo.inventory.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginDTO {
 
     @NotBlank(message = "El nombre de usuario es obligatorio")
     private String username;
@@ -10,10 +10,10 @@ public class LoginRequest {
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
 
-    public LoginRequest() {
+    public LoginDTO() {
     }
 
-    public LoginRequest(String username, String password) {
+    public LoginDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }

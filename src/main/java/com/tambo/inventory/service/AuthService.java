@@ -1,16 +1,14 @@
 package com.tambo.inventory.service;
 
 import com.tambo.inventory.dto.AuthResponse;
-import com.tambo.inventory.dto.LoginRequest;
-import com.tambo.inventory.dto.RegisterRequest;
+import com.tambo.inventory.dto.LoginDTO;
+import com.tambo.inventory.dto.UsuarioDTO;
 import com.tambo.inventory.entity.Rol;
 import com.tambo.inventory.entity.RolNombre;
-import com.tambo.inventory.entity.Sucursal;
 import com.tambo.inventory.entity.Usuario;
 import com.tambo.inventory.exception.BadRequestException;
 import com.tambo.inventory.exception.ResourceNotFoundException;
 import com.tambo.inventory.repository.RolRepository;
-import com.tambo.inventory.repository.SucursalRepository;
 import com.tambo.inventory.repository.UsuarioRepository;
 import com.tambo.inventory.security.JwtTokenProvider;
 import com.tambo.inventory.security.UserPrincipal;
@@ -35,7 +33,6 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
-    private final SucursalRepository sucursalRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
 
@@ -44,19 +41,17 @@ public class AuthService {
             AuthenticationManager authenticationManager,
             UsuarioRepository usuarioRepository,
             RolRepository rolRepository,
-            SucursalRepository sucursalRepository,
             PasswordEncoder passwordEncoder,
             JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.usuarioRepository = usuarioRepository;
         this.rolRepository = rolRepository;
-        this.sucursalRepository = sucursalRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
     }
 
     @Transactional(readOnly = true)
-    public AuthResponse login(LoginRequest loginRequest) {
+    public AuthResponse login(LoginDTO loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -72,58 +67,51 @@ public class AuthService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        // Obtener el ID de la sucursal de la base de datos
-        Usuario usuario = usuarioRepository.findByUsername(userPrincipal.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
-        
-        Long sucursalId = (usuario.getSucursal() != null) ? usuario.getSucursal().getId() : null;
-
         return new AuthResponse(
                 jwt,
                 userPrincipal.getUsername(),
                 userPrincipal.getNombre(),
                 roles,
-                sucursalId
+                1L // Sucessfully authenticated, send a mock sucursalId to not break the frontend expectation
         );
     }
 
     @Transactional
-    public Usuario registrar(RegisterRequest registerRequest) {
-        if (usuarioRepository.existsByUsername(registerRequest.getUsername())) {
+    public Usuario registrar(UsuarioDTO usuarioDTO) {
+        if (usuarioRepository.existsByUsername(usuarioDTO.getUsername())) {
             throw new BadRequestException("El nombre de usuario ya está en uso.");
         }
 
-        if (usuarioRepository.existsByEmail(registerRequest.getEmail())) {
+        if (usuarioRepository.existsByCorreo(usuarioDTO.getCorreo())) {
             throw new BadRequestException("El correo electrónico ya está registrado.");
         }
 
         Usuario usuario = new Usuario();
-        usuario.setUsername(registerRequest.getUsername());
-        usuario.setNombre(registerRequest.getNombre());
-        usuario.setEmail(registerRequest.getEmail());
-        usuario.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        usuario.setUsername(usuarioDTO.getUsername());
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setCorreo(usuarioDTO.getCorreo());
+        usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         usuario.setActivo(true);
 
-        // Asignación de Roles
         Set<Rol> roles = new HashSet<>();
-        if (registerRequest.getRoles() == null || registerRequest.getRoles().isEmpty()) {
-            Rol userRol = rolRepository.findByNombre(RolNombre.ROLE_EMPLEADO)
-                    .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol por defecto ROLE_EMPLEADO no fue encontrado en la base de datos."));
+        if (usuarioDTO.getRoles() == null || usuarioDTO.getRoles().isEmpty()) {
+            Rol userRol = rolRepository.findByNombre(RolNombre.ROLE_USER)
+                    .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol por defecto ROLE_USER no fue encontrado."));
             roles.add(userRol);
         } else {
-            registerRequest.getRoles().forEach(role -> {
+            usuarioDTO.getRoles().forEach(role -> {
                 switch (role.toUpperCase()) {
                     case "ADMIN":
                     case "ROLE_ADMIN":
                         Rol adminRol = rolRepository.findByNombre(RolNombre.ROLE_ADMIN)
-                                .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol ROLE_ADMIN no fue encontrado en la base de datos."));
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol ROLE_ADMIN no fue encontrado."));
                         roles.add(adminRol);
                         break;
-                    case "EMPLEADO":
-                    case "ROLE_EMPLEADO":
-                        Rol empleadoRol = rolRepository.findByNombre(RolNombre.ROLE_EMPLEADO)
-                                .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol ROLE_EMPLEADO no fue encontrado en la base de datos."));
-                        roles.add(empleadoRol);
+                    case "USER":
+                    case "ROLE_USER":
+                        Rol userRol = rolRepository.findByNombre(RolNombre.ROLE_USER)
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: El Rol ROLE_USER no fue encontrado."));
+                        roles.add(userRol);
                         break;
                     default:
                         throw new BadRequestException("Error: El Rol " + role + " no es válido.");
@@ -132,13 +120,59 @@ public class AuthService {
         }
         usuario.setRoles(roles);
 
-        // Asignación de Sucursal (opcional)
-        if (registerRequest.getSucursalId() != null) {
-            Sucursal sucursal = sucursalRepository.findById(registerRequest.getSucursalId())
-                    .orElseThrow(() -> new ResourceNotFoundException("La sucursal con ID " + registerRequest.getSucursalId() + " no existe."));
-            usuario.setSucursal(sucursal);
+        return usuarioRepository.save(usuario);
+    }
+
+    @Transactional(readOnly = true)
+    public List<UsuarioDTO> listarTodos() {
+        return usuarioRepository.findAll().stream()
+                .map(u -> new UsuarioDTO(
+                        u.getId(),
+                        u.getUsername(),
+                        null,
+                        u.getNombre(),
+                        u.getCorreo(),
+                        u.getRoles().stream().map(r -> r.getNombre().name()).collect(Collectors.toSet())
+                )).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public UsuarioDTO actualizar(Long id, UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setCorreo(usuarioDTO.getCorreo());
+        if (usuarioDTO.getPassword() != null && !usuarioDTO.getPassword().isBlank()) {
+            usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         }
 
-        return usuarioRepository.save(usuario);
+        if (usuarioDTO.getRoles() != null && !usuarioDTO.getRoles().isEmpty()) {
+            Set<Rol> roles = new HashSet<>();
+            usuarioDTO.getRoles().forEach(role -> {
+                Rol r = rolRepository.findByNombre(RolNombre.valueOf(role))
+                        .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado: " + role));
+                roles.add(r);
+            });
+            usuario.setRoles(roles);
+        }
+
+        Usuario guardado = usuarioRepository.save(usuario);
+        return new UsuarioDTO(
+                guardado.getId(),
+                guardado.getUsername(),
+                null,
+                guardado.getNombre(),
+                guardado.getCorreo(),
+                guardado.getRoles().stream().map(r -> r.getNombre().name()).collect(Collectors.toSet())
+        );
+    }
+
+    @Transactional
+    public void eliminar(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Usuario no encontrado");
+        }
+        usuarioRepository.deleteById(id);
     }
 }

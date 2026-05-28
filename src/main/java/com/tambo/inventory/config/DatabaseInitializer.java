@@ -2,10 +2,8 @@ package com.tambo.inventory.config;
 
 import com.tambo.inventory.entity.Rol;
 import com.tambo.inventory.entity.RolNombre;
-import com.tambo.inventory.entity.Sucursal;
 import com.tambo.inventory.entity.Usuario;
 import com.tambo.inventory.repository.RolRepository;
-import com.tambo.inventory.repository.SucursalRepository;
 import com.tambo.inventory.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,33 +19,27 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private final RolRepository rolRepository;
     private final UsuarioRepository usuarioRepository;
-    private final SucursalRepository sucursalRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public DatabaseInitializer(
             RolRepository rolRepository,
             UsuarioRepository usuarioRepository,
-            SucursalRepository sucursalRepository,
             PasswordEncoder passwordEncoder) {
         this.rolRepository = rolRepository;
         this.usuarioRepository = usuarioRepository;
-        this.sucursalRepository = sucursalRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        // 1. Inicializar Roles
         Rol adminRol = inicializarRol(RolNombre.ROLE_ADMIN);
-        Rol empleadoRol = inicializarRol(RolNombre.ROLE_EMPLEADO);
+        Rol userRol = inicializarRol(RolNombre.ROLE_USER);
 
-        // 2. Inicializar Sucursal por defecto
-        Sucursal sedeCentral = inicializarSucursalCentral();
+        inicializarUsuario("admin", "admin123", "Administrador Tambo", "admin@tambo.pe", adminRol);
 
-        // 3. Inicializar Usuario Administrador
-        inicializarUsuarioAdmin(adminRol, sedeCentral);
+        inicializarUsuario("empleado", "empleado123", "Empleado Tambo", "empleado@tambo.pe", userRol);
     }
 
     private Rol inicializarRol(RolNombre nombre) {
@@ -59,35 +51,23 @@ public class DatabaseInitializer implements CommandLineRunner {
                 });
     }
 
-    private Sucursal inicializarSucursalCentral() {
-        return sucursalRepository.findByNombre("Sede Central")
-                .orElseGet(() -> {
-                    Sucursal sucursal = new Sucursal();
-                    sucursal.setNombre("Sede Central");
-                    sucursal.setDireccion("Av. Javier Prado Este 1020, San Isidro");
-                    sucursal.setTelefono("01-4445555");
-                    return sucursalRepository.save(sucursal);
-                });
-    }
-
-    private void inicializarUsuarioAdmin(Rol adminRol, Sucursal sucursal) {
-        Usuario admin = usuarioRepository.findByUsername("admin")
+    private void inicializarUsuario(String username, String password, String nombre, String correo, Rol rol) {
+        Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseGet(() -> {
                     Usuario nuevo = new Usuario();
-                    nuevo.setUsername("admin");
-                    nuevo.setNombre("Administrador Tambo");
-                    nuevo.setEmail("admin@tambo.pe");
+                    nuevo.setUsername(username);
+                    nuevo.setNombre(nombre);
+                    nuevo.setCorreo(correo);
                     nuevo.setActivo(true);
-                    nuevo.setSucursal(sucursal);
 
                     Set<Rol> roles = new HashSet<>();
-                    roles.add(adminRol);
+                    roles.add(rol);
                     nuevo.setRoles(roles);
                     return nuevo;
                 });
 
-        admin.setPassword(passwordEncoder.encode("admin123"));
-        usuarioRepository.save(admin);
-        System.out.println(">>> Usuario administrador inicial configurado/actualizado con éxito (admin/admin123)");
+        usuario.setPassword(passwordEncoder.encode(password));
+        usuarioRepository.save(usuario);
+        System.out.println(">>> Usuario " + username + " inicializado con éxito (" + username + "/" + password + ")");
     }
 }

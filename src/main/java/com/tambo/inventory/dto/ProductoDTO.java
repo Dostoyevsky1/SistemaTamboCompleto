@@ -1,41 +1,37 @@
-package com.tambo.inventory.entity;
+package com.tambo.inventory.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "productos")
-public class Producto {
+public class ProductoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 150)
+    @NotBlank(message = "El nombre del producto es obligatorio")
     private String nombre;
 
-    @Column(length = 255)
     private String descripcion;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @NotNull(message = "El precio es obligatorio")
+    @DecimalMin(value = "0.0", inclusive = true, message = "El precio no puede ser negativo")
     private BigDecimal precio;
 
-    @Column(nullable = false)
-    private Integer stock = 0;
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser negativo")
+    private Integer stock;
 
-    @Column(nullable = false)
-    private Boolean activo = true;
-
-    public Producto() {
+    public ProductoDTO() {
     }
 
-    public Producto(Long id, String nombre, String descripcion, BigDecimal precio, Integer stock, Boolean activo) {
+    public ProductoDTO(Long id, String nombre, String descripcion, BigDecimal precio, Integer stock) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.activo = activo;
     }
 
     public Long getId() {
@@ -75,17 +71,6 @@ public class Producto {
     }
 
     public void setStock(Integer stock) {
-        if (stock < 0) {
-            throw new IllegalArgumentException("El stock no puede ser negativo");
-        }
         this.stock = stock;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 }

@@ -38,8 +38,15 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                // Rutas públicas (login, registro e inicio)
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/", "/index.html", "/static/**", "/assets/**", "/favicon.ico", "/*.js", "/*.css").permitAll()
+                
+                // Endpoints
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/usuarios/**").hasAnyRole("USER", "ADMIN")
+                
+                // Demás Apis necesitan autenticación
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

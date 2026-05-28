@@ -16,7 +16,7 @@ public class UserPrincipal implements UserDetails {
     private Long id;
     private String nombre;
     private String username;
-    private String email;
+    private String correo;
 
     @JsonIgnore
     private String password;
@@ -26,11 +26,11 @@ public class UserPrincipal implements UserDetails {
     public UserPrincipal() {
     }
 
-    public UserPrincipal(Long id, String nombre, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String nombre, String username, String correo, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.nombre = nombre;
         this.username = username;
-        this.email = email;
+        this.correo = correo;
         this.password = password;
         this.authorities = authorities;
     }
@@ -44,7 +44,7 @@ public class UserPrincipal implements UserDetails {
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getUsername(),
-                usuario.getEmail(),
+                usuario.getCorreo(),
                 usuario.getPassword(),
                 authorities
         );
@@ -66,12 +66,12 @@ public class UserPrincipal implements UserDetails {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override

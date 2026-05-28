@@ -2,8 +2,8 @@ package com.tambo.inventory.controller;
 
 import com.tambo.inventory.dto.ApiResponse;
 import com.tambo.inventory.dto.AuthResponse;
-import com.tambo.inventory.dto.LoginRequest;
-import com.tambo.inventory.dto.RegisterRequest;
+import com.tambo.inventory.dto.LoginDTO;
+import com.tambo.inventory.dto.UsuarioDTO;
 import com.tambo.inventory.entity.Usuario;
 import com.tambo.inventory.service.AuthService;
 import jakarta.validation.Valid;
@@ -27,14 +27,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginDTO loginRequest) {
         AuthResponse response = authService.login(loginRequest);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse> registrar(@Valid @RequestBody RegisterRequest registerRequest) {
-        Usuario usuario = authService.registrar(registerRequest);
+    public ResponseEntity<ApiResponse> registrar(@Valid @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuario = authService.registrar(usuarioDTO);
         return new ResponseEntity<>(
                 new ApiResponse(true, "Usuario '" + usuario.getUsername() + "' registrado exitosamente."),
                 HttpStatus.CREATED

@@ -5,37 +5,44 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.util.Set;
 
-public class RegisterRequest {
+public class UsuarioDTO {
+
+    private Long id;
 
     @NotBlank(message = "El nombre de usuario es obligatorio")
     @Size(min = 3, max = 50, message = "El nombre de usuario debe tener entre 3 y 50 caracteres")
     private String username;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6, max = 100, message = "La contraseña debe tener al menos 6 caracteres")
+    @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
 
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
     @NotBlank(message = "El correo electrónico es obligatorio")
-    @Email(message = "El correo electrónico debe ser válido")
-    private String email;
+    @Email(message = "Debe proporcionar un correo electrónico válido")
+    private String correo;
 
     private Set<String> roles;
 
-    private Long sucursalId;
-
-    public RegisterRequest() {
+    public UsuarioDTO() {
     }
 
-    public RegisterRequest(String username, String password, String nombre, String email, Set<String> roles, Long sucursalId) {
+    public UsuarioDTO(Long id, String username, String password, String nombre, String correo, Set<String> roles) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.nombre = nombre;
-        this.email = email;
+        this.correo = correo;
         this.roles = roles;
-        this.sucursalId = sucursalId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -62,12 +69,12 @@ public class RegisterRequest {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public Set<String> getRoles() {
@@ -76,13 +83,5 @@ public class RegisterRequest {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
-    }
-
-    public Long getSucursalId() {
-        return sucursalId;
-    }
-
-    public void setSucursalId(Long sucursalId) {
-        this.sucursalId = sucursalId;
     }
 }

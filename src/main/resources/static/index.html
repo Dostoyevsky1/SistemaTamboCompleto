@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Tambo Ops - Sistema de Gestión Operativa</title>
+    <title>Sistema Tambo - Control de Inventario Simplificado</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -14,95 +14,25 @@
                 extend: {
                     "colors": {
                         "on-background": "#e5e2e1",
-                        "on-tertiary-fixed": "#2a064b",
                         "outline-variant": "#4c4353",
-                        "on-secondary": "#3f2e00",
-                        "inverse-surface": "#e5e2e1",
-                        "on-error": "#690005",
                         "primary-container": "#7b2cbf",
-                        "tertiary": "#dbb8ff",
-                        "surface-container-low": "#1c1b1b",
-                        "error-container": "#93000a",
-                        "surface-container": "#201f1f",
-                        "secondary-fixed": "#ffdf9a",
-                        "on-tertiary": "#402061",
-                        "on-primary-fixed": "#2d0050",
-                        "inverse-on-surface": "#313030",
+                        "secondary-container": "#ffc300",
                         "primary": "#deb7ff",
                         "on-primary": "#4a007f",
-                        "surface-bright": "#393939",
-                        "surface-container-high": "#2a2a2a",
-                        "inverse-primary": "#8234c6",
                         "surface": "#131313",
-                        "tertiary-fixed-dim": "#dbb8ff",
-                        "on-primary-container": "#e4c2ff",
-                        "surface-variant": "#353534",
-                        "surface-container-lowest": "#0e0e0e",
-                        "on-tertiary-fixed-variant": "#57387a",
-                        "on-secondary-container": "#6d5200",
-                        "secondary-container": "#ffc300",
-                        "on-tertiary-container": "#e1c3ff",
-                        "surface-tint": "#deb7ff",
-                        "primary-fixed": "#f1dbff",
-                        "secondary": "#ffe5b2",
-                        "secondary-fixed-dim": "#f8be00",
-                        "tertiary-container": "#69498c",
-                        "background": "#131313",
-                        "surface-dim": "#131313",
-                        "on-secondary-fixed": "#251a00",
+                        "surface-container": "#201f1f",
+                        "background": "#0e0e0e",
                         "error": "#ffb4ab",
-                        "on-secondary-fixed-variant": "#5a4300",
-                        "outline": "#988d9e",
-                        "on-primary-fixed-variant": "#680eac",
                         "on-surface": "#e5e2e1",
-                        "on-error-container": "#ffdad6",
-                        "tertiary-fixed": "#efdbff",
-                        "surface-container-highest": "#353534",
-                        "on-surface-variant": "#cfc2d5",
-                        "primary-fixed-dim": "#deb7ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "lg": "24px",
-                        "xl": "48px",
-                        "sm": "8px",
-                        "container-max": "1440px",
-                        "gutter": "16px",
-                        "xs": "4px",
-                        "md": "16px",
-                        "base": "4px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Hanken Grotesk"],
-                        "label-sm": ["JetBrains Mono"],
-                        "headline-lg": ["Hanken Grotesk"],
-                        "body-md": ["Hanken Grotesk"],
-                        "body-lg": ["Hanken Grotesk"],
-                        "data-tabular": ["JetBrains Mono"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "data-tabular": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                        "on-surface-variant": "#cfc2d5"
                     }
                 }
             }
         }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
         body {
-            background-color: #0A0A0A;
+            background-color: #0e0e0e;
             color: #e5e2e1;
             font-family: 'Hanken Grotesk', sans-serif;
         }
@@ -118,135 +48,119 @@
         }
     </style>
 </head>
-<body class="font-body-md text-body-md overflow-hidden h-screen bg-[#0A0A0A]">
+<body class="overflow-hidden h-screen bg-[#0e0e0e] text-sm">
 
     <!-- ==================== PANTALLA DE LOGIN ==================== -->
-    <div id="login-container" class="flex items-center justify-center min-h-screen bg-[#0A0A0A] px-4">
+    <div id="login-container" class="flex items-center justify-center min-h-screen bg-[#0e0e0e] px-4">
         <div class="w-full max-w-md bg-surface-container border border-outline-variant p-8 rounded-xl shadow-2xl space-y-6">
             <div class="text-center">
-                <h1 class="text-3xl font-extrabold text-primary tracking-tight">Tambo Ops</h1>
-                <p class="text-on-surface-variant mt-2 text-sm">Ingresa tus credenciales para acceder al sistema</p>
+                <h1 class="text-3xl font-extrabold text-primary tracking-tight">Sistema Tambo</h1>
+                <p class="text-on-surface-variant mt-2 text-xs">Gestión Simplificada de Inventario y Pedidos</p>
             </div>
-            <div id="login-error-alert" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs">
+            <div id="login-error-alert" class="hidden p-3 bg-red-950/20 border border-red-500/50 rounded text-red-200 text-xs">
                 Credenciales incorrectas. Inténtalo de nuevo.
             </div>
             <form id="login-form" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-label-sm uppercase tracking-widest text-on-surface-variant mb-2">Usuario</label>
-                    <input type="text" id="login-username" required class="w-full bg-[#161616] border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder-on-surface-variant/30" placeholder="Ej: admin"/>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Usuario</label>
+                    <input type="text" id="login-username" required class="w-full bg-[#161616] border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Ej: admin o empleado"/>
                 </div>
                 <div>
-                    <label class="block text-xs font-label-sm uppercase tracking-widest text-on-surface-variant mb-2">Contraseña</label>
-                    <input type="password" id="login-password" required class="w-full bg-[#161616] border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder-on-surface-variant/30" placeholder="••••••••"/>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Contraseña</label>
+                    <input type="password" id="login-password" required class="w-full bg-[#161616] border border-outline-variant rounded-lg px-4 py-2 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="••••••••"/>
                 </div>
                 <button type="submit" class="w-full bg-primary text-on-primary py-2.5 rounded-lg font-bold hover:opacity-90 active:scale-98 transition-all">
                     Iniciar Sesión
                 </button>
             </form>
-            <div class="text-center pt-2">
-                <p class="text-xs text-on-surface-variant">Acceso Administrador por defecto: <span class="font-bold text-secondary">admin / admin123</span></p>
+            <div class="text-center pt-2 border-t border-outline-variant/30 space-y-1">
+                <p class="text-xs text-on-surface-variant/80">Cuentas por defecto:</p>
+                <p class="text-[11px] text-on-surface-variant">Admin: <span class="font-bold text-secondary-container">admin / admin123</span></p>
+                <p class="text-[11px] text-on-surface-variant">Empleado: <span class="font-bold text-secondary-container">empleado / empleado123</span></p>
             </div>
         </div>
     </div>
 
-    <!-- ==================== APLICACIÓN PRINCIPAL (CONTAINER) ==================== -->
+    <!-- ==================== APLICACIÓN PRINCIPAL ==================== -->
     <div id="app-container" class="hidden flex h-screen overflow-hidden">
         
         <!-- SIDEBAR DE NAVEGACIÓN -->
-        <aside class="w-[260px] bg-surface-container-low border-r border-outline-variant flex flex-col py-lg z-50">
-            <div class="px-lg mb-xl">
-                <h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Tambo Ops</h1>
-                <p class="text-on-surface-variant font-body-md opacity-70 text-xs">Gestión de Inventario</p>
+        <aside class="w-[260px] bg-surface border-r border-outline-variant flex flex-col py-6 z-50">
+            <div class="px-6 mb-8">
+                <h1 class="text-2xl font-bold text-primary tracking-tight">Sistema Tambo</h1>
+                <p class="text-on-surface-variant opacity-70 text-xs">Panel Operativo</p>
             </div>
             <nav id="nav-links" class="flex-1 space-y-1">
-                <a href="#" data-view="dashboard" class="nav-item flex items-center gap-3 px-lg py-3 text-primary bg-primary-container/10 border-r-2 border-primary transition-all duration-200">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span class="font-body-md">Dashboard</span>
-                </a>
-                <a href="#" data-view="inventario" class="nav-item flex items-center gap-3 px-lg py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                <a href="#" data-view="productos" class="nav-item flex items-center gap-3 px-6 py-3 text-primary bg-primary-container/10 border-r-2 border-primary transition-all duration-200">
                     <span class="material-symbols-outlined">inventory_2</span>
-                    <span class="font-body-md">Inventario</span>
+                    <span>Productos</span>
                 </a>
-                <a href="#" data-view="pedidos" class="nav-item flex items-center gap-3 px-lg py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                <a href="#" data-view="pedidos" class="nav-item flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container/50 transition-colors">
                     <span class="material-symbols-outlined">shopping_cart</span>
-                    <span class="font-body-md">Pedidos y Ventas</span>
+                    <span>Pedidos</span>
                 </a>
-                <a href="#" data-view="catalogo" class="nav-item flex items-center gap-3 px-lg py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
-                    <span class="material-symbols-outlined">menu_book</span>
-                    <span class="font-body-md">Catálogo</span>
-                </a>
-                <a href="#" data-view="sucursales" class="nav-item flex items-center gap-3 px-lg py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
-                    <span class="material-symbols-outlined">storefront</span>
-                    <span class="font-body-md">Sucursales</span>
+                <a href="#" data-view="usuarios" id="nav-usuarios" style="display: none;" class="nav-item flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container/50 transition-colors">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Usuarios (Admin)</span>
                 </a>
             </nav>
-            <div class="px-lg mt-auto pt-lg border-t border-outline-variant/30 space-y-2">
-                <div class="flex items-center gap-3 p-2 rounded hover:bg-surface-container-high transition-colors cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold" id="user-avatar-text">A</div>
+            <div class="px-6 mt-auto pt-6 border-t border-outline-variant/30 space-y-3">
+                <div class="flex items-center gap-3 p-2 rounded">
+                    <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold" id="user-avatar-text">U</div>
                     <div>
-                        <p class="font-bold text-on-surface text-sm" id="user-display-name">Admin Tambo</p>
-                        <p class="text-[10px] text-on-surface-variant" id="user-display-role">Sede Central</p>
+                        <p class="font-bold text-on-surface text-xs" id="user-display-name">Usuario</p>
+                        <p class="text-[10px] text-on-surface-variant" id="user-display-role">Rol</p>
                     </div>
                 </div>
-                <button id="logout-btn" class="w-full flex items-center justify-center gap-2 py-2 border border-outline-variant/35 rounded text-xs text-error hover:bg-error/10 transition-colors">
+                <button id="logout-btn" class="w-full flex items-center justify-center gap-2 py-2 border border-outline-variant/50 rounded text-xs text-error hover:bg-error/10 transition-colors">
                     <span class="material-symbols-outlined text-sm">logout</span> Cerrar Sesión
                 </button>
             </div>
         </aside>
 
-        <!-- ÁREA CONTENEDORA DE PÁGINAS -->
-        <div class="flex-1 flex flex-col overflow-hidden bg-surface-container-lowest">
+        <!-- CONTENEDOR DE PÁGINAS -->
+        <div class="flex-1 flex flex-col overflow-hidden bg-background">
             
-            <!-- HEADER DE TOPBAR -->
-            <header class="flex justify-between items-center h-16 px-xl bg-background border-b border-outline-variant sticky top-0 z-40">
-                <div class="flex items-center flex-1 max-w-xl">
-                    <div class="relative w-full group">
+            <!-- HEADER TOPBAR -->
+            <header class="flex justify-between items-center h-16 px-8 bg-surface border-b border-outline-variant sticky top-0 z-40">
+                <div id="search-container" class="flex items-center flex-1 max-w-md">
+                    <div class="relative w-full">
                         <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-                        <input id="global-search" class="w-full bg-surface-container border-none rounded-lg pl-10 pr-4 py-2 text-body-md focus:ring-1 focus:ring-primary placeholder-on-surface-variant/50 transition-all" placeholder="Buscar en Tambo..." type="text"/>
+                        <input id="global-search" oninput="realizarBusqueda(this.value)" class="w-full bg-surface-container border-none rounded-lg pl-10 pr-4 py-1.5 text-xs focus:ring-1 focus:ring-primary placeholder-on-surface-variant/50 transition-all text-on-surface" placeholder="Buscar productos por nombre..."/>
                     </div>
                 </div>
-                <div class="flex items-center gap-lg">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-secondary-container">location_on</span>
-                        <span id="current-sucursal-label" class="text-label-sm text-on-surface-variant">Sede Central</span>
-                    </div>
-                    <div class="h-8 w-px bg-outline-variant/50"></div>
-                    <div class="flex items-center gap-sm">
-                        <p class="text-label-sm text-on-surface-variant">OPERACIONES_V3</p>
-                    </div>
+                <div class="flex items-center gap-4">
+                    <!-- Eliminado AVANCE_SIMPLIFICADO_V1 -->
                 </div>
             </header>
 
-            <!-- CONTENEDOR PRINCIPAL DE PANTALLAS (SPA RENDER) -->
-            <main class="flex-1 overflow-y-auto p-xl custom-scrollbar" id="view-port">
-                <!-- El contenido de las páginas se renderizará dinámicamente mediante Javascript -->
+            <!-- PORT RENDER SPA -->
+            <main class="flex-1 overflow-y-auto p-8 custom-scrollbar" id="view-port">
+                <!-- Se renderiza con JS -->
             </main>
         </div>
     </div>
 
     <!-- ==================== MODALES ==================== -->
-    <div id="modal-container" class="hidden fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <!-- El contenido del modal se inyectará aquí -->
+    <div id="modal-container" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <!-- El contenido se inyectará dinámicamente -->
     </div>
 
-    <!-- ==================== LÓGICA DE JAVASCRIPT ==================== -->
+    <!-- ==================== LOGICA JAVASCRIPT ==================== -->
     <script>
-        const API_URL = ""; // Relativa a nuestro host
+        const API_URL = "";
 
-        // Estado de la Aplicación
         const state = {
             token: localStorage.getItem("jwt_token") || null,
             username: localStorage.getItem("jwt_username") || null,
             nombre: localStorage.getItem("jwt_nombre") || null,
             roles: JSON.parse(localStorage.getItem("jwt_roles")) || [],
-            sucursalId: localStorage.getItem("jwt_sucursalId") || null,
-            sucursales: [],
+            currentView: "productos",
             productos: [],
-            categorias: [],
-            currentView: "dashboard"
+            pedidos: [],
+            usuarios: []
         };
 
-        // Header de Autorización estándar para peticiones fetch
         function getHeaders() {
             return {
                 "Content-Type": "application/json",
@@ -254,7 +168,6 @@
             };
         }
 
-        // Inicializar Aplicación al Cargar
         document.addEventListener("DOMContentLoaded", () => {
             initEvents();
             checkAuth();
@@ -267,37 +180,22 @@
                 document.getElementById("user-display-name").innerText = state.nombre;
                 document.getElementById("user-display-role").innerText = state.roles.includes("ROLE_ADMIN") ? "Administrador" : "Empleado";
                 document.getElementById("user-avatar-text").innerText = state.nombre.charAt(0).toUpperCase();
-                
-                // Cargar datos maestros comunes
-                cargarDatosMaestros().then(() => {
-                    renderView(state.currentView);
-                });
+
+                if (state.roles.includes("ROLE_ADMIN")) {
+                    document.getElementById("nav-usuarios").style.display = "flex";
+                } else {
+                    document.getElementById("nav-usuarios").style.display = "none";
+                }
+
+                renderView(state.currentView);
             } else {
                 document.getElementById("login-container").classList.remove("hidden");
                 document.getElementById("app-container").classList.add("hidden");
             }
         }
 
-        async function cargarDatosMaestros() {
-            try {
-                // Obtener sucursales
-                const resSuc = await fetch(`${API_URL}/api/sucursales`, { headers: getHeaders() });
-                if (resSuc.ok) state.sucursales = await resSuc.json();
-
-                // Actualizar label de sucursal en topbar
-                if (state.sucursalId) {
-                    const suc = state.sucursales.find(s => s.id == state.sucursalId);
-                    if (suc) document.getElementById("current-sucursal-label").innerText = `Sede: ${suc.nombre}`;
-                } else {
-                    document.getElementById("current-sucursal-label").innerText = "Sede Central (Admin)";
-                }
-            } catch (err) {
-                console.error("Error cargando datos maestros:", err);
-            }
-        }
-
         function initEvents() {
-            // Manejador de Login
+            // Login Form
             document.getElementById("login-form").addEventListener("submit", async (e) => {
                 e.preventDefault();
                 const username = document.getElementById("login-username").value;
@@ -317,13 +215,11 @@
                         state.username = data.username;
                         state.nombre = data.nombre;
                         state.roles = data.roles;
-                        state.sucursalId = data.sucursalId;
 
                         localStorage.setItem("jwt_token", data.token);
                         localStorage.setItem("jwt_username", data.username);
                         localStorage.setItem("jwt_nombre", data.nombre);
                         localStorage.setItem("jwt_roles", JSON.stringify(data.roles));
-                        if (data.sucursalId) localStorage.setItem("jwt_sucursalId", data.sucursalId);
 
                         checkAuth();
                     } else {
@@ -334,34 +230,32 @@
                 }
             });
 
-            // Manejador de Logout
+            // Logout Button
             document.getElementById("logout-btn").addEventListener("click", () => {
                 state.token = null;
                 state.username = null;
                 state.nombre = null;
                 state.roles = [];
-                state.sucursalId = null;
+                state.currentView = "productos";
 
                 localStorage.removeItem("jwt_token");
                 localStorage.removeItem("jwt_username");
                 localStorage.removeItem("jwt_nombre");
                 localStorage.removeItem("jwt_roles");
-                localStorage.removeItem("jwt_sucursalId");
 
                 checkAuth();
             });
 
-            // Navegación del Sidebar
+            // Sidebar navigation
             document.querySelectorAll("#nav-links a").forEach(link => {
                 link.addEventListener("click", (e) => {
                     e.preventDefault();
                     const view = link.getAttribute("data-view");
-                    
-                    // Modificar clases activas
+
                     document.querySelectorAll("#nav-links a").forEach(item => {
-                        item.className = "nav-item flex items-center gap-3 px-lg py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors";
+                        item.className = "nav-item flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container/50 transition-colors";
                     });
-                    link.className = "nav-item flex items-center gap-3 px-lg py-3 text-primary bg-primary-container/10 border-r-2 border-primary transition-all duration-200";
+                    link.className = "nav-item flex items-center gap-3 px-6 py-3 text-primary bg-primary-container/10 border-r-2 border-primary transition-all duration-200";
 
                     state.currentView = view;
                     renderView(view);
@@ -369,1320 +263,452 @@
             });
         }
 
-        // ==================== RENDERING DE VISTAS (PÁGINAS) ====================
-
         async function renderView(view) {
+            if (view === "usuarios" && !state.roles.includes("ROLE_ADMIN")) {
+                state.currentView = "productos";
+                renderView("productos");
+                return;
+            }
+
+            const searchContainer = document.getElementById("search-container");
+            if (searchContainer) {
+                if (view === "productos") {
+                    searchContainer.style.display = "flex";
+                } else {
+                    searchContainer.style.display = "none";
+                    const globalSearch = document.getElementById("global-search");
+                    if (globalSearch) globalSearch.value = "";
+                }
+            }
+
             const viewport = document.getElementById("view-port");
             viewport.innerHTML = `<div class="flex items-center justify-center h-64"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>`;
 
-            if (view === "dashboard") {
-                await renderDashboard(viewport);
-            } else if (view === "inventario") {
-                await renderInventario(viewport);
+            if (view === "productos") {
+                await renderProductos(viewport);
             } else if (view === "pedidos") {
                 await renderPedidos(viewport);
-            } else if (view === "catalogo") {
-                await renderCatalogo(viewport);
-            } else if (view === "sucursales") {
-                await renderSucursales(viewport);
+            } else if (view === "usuarios") {
+                await renderUsuarios(viewport);
             }
         }
 
-        // 1. VISTA DASHBOARD
-        async function renderDashboard(container) {
+        // ==================== VISTA PRODUCTOS ====================
+        async function renderProductos(container) {
             try {
-                // Consultar KPIs reales
-                const sucursalQuery = state.sucursalId ? `/sucursal/${state.sucursalId}` : "";
-                const resKpi = await fetch(`${API_URL}/api/reportes/kpis${sucursalQuery}`, { headers: getHeaders() });
-                const kpis = resKpi.ok ? await resKpi.json() : { ventasDelDia: 0, pedidosPendientes: 0, stockCritico: 0, entregasHoy: 0 };
+                const res = await fetch(`${API_URL}/api/productos`, { headers: getHeaders() });
+                state.productos = res.ok ? await res.json() : [];
 
-                // Consultar pedidos recientes
-                const resPed = state.sucursalId 
-                    ? await fetch(`${API_URL}/api/pedidos/sucursal/${state.sucursalId}`, { headers: getHeaders() })
-                    : await fetch(`${API_URL}/api/pedidos`, { headers: getHeaders() });
-                const pedidos = resPed.ok ? await resPed.json() : [];
+                const isAdmin = state.roles.includes("ROLE_ADMIN");
 
                 container.innerHTML = `
-                    <div class="max-w-[1440px] mx-auto space-y-lg">
-                        <!-- Cabecera -->
-                        <div class="flex justify-between items-end mb-xl">
+                    <div class="max-w-6xl mx-auto space-y-6">
+                        <div class="flex justify-between items-center">
                             <div>
-                                <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Dashboard General</h2>
-                                <p class="text-on-surface-variant mt-1">Monitoreo de rendimiento en tiempo real.</p>
+                                <h2 class="text-2xl font-bold text-on-surface">Catálogo de Productos</h2>
+                                <p class="text-on-surface-variant text-xs mt-1">Control del inventario y existencias en tiempo real.</p>
                             </div>
-                            <button onclick="mostrarModalRegistrarVenta()" class="bg-primary text-on-primary px-lg py-2 rounded-lg font-bold flex items-center gap-2 hover:opacity-80 transition-opacity">
-                                <span class="material-symbols-outlined text-[20px]">add</span>
-                                Registrar Venta
-                            </button>
-                        </div>
-
-                        <!-- Bento Grid de KPIs -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-                            <div class="bg-surface-container p-md border border-outline-variant rounded-xl hover:border-primary/50 transition-colors">
-                                <div class="flex justify-between items-start mb-sm">
-                                    <span class="text-on-surface-variant text-label-sm uppercase tracking-widest">Ventas del Día</span>
-                                    <span class="material-symbols-outlined text-primary">payments</span>
-                                </div>
-                                <h3 class="font-data-tabular text-[26px] font-bold text-on-surface">S/ ${parseFloat(kpis.ventasDelDia).toFixed(2)}</h3>
-                                <p class="text-[10px] text-secondary mt-2 flex items-center gap-1">Ventas acumuladas hoy</p>
-                            </div>
-
-                            <div class="bg-surface-container p-md border border-outline-variant rounded-xl hover:border-primary/50 transition-colors">
-                                <div class="flex justify-between items-start mb-sm">
-                                    <span class="text-on-surface-variant text-label-sm uppercase tracking-widest">Pedidos Pendientes</span>
-                                    <span class="material-symbols-outlined text-secondary-container">pending_actions</span>
-                                </div>
-                                <h3 class="font-data-tabular text-[26px] font-bold text-on-surface">${kpis.pedidosPendientes}</h3>
-                                <p class="text-[10px] text-on-surface-variant mt-2">Requieren preparación/despacho</p>
-                            </div>
-
-                            <div class="bg-surface-container p-md border border-outline-variant rounded-xl hover:border-primary/50 transition-colors ${kpis.stockCritico > 0 ? 'border-l-4 border-l-error' : ''}">
-                                <div class="flex justify-between items-start mb-sm">
-                                    <span class="text-on-surface-variant text-label-sm uppercase tracking-widest">Stock Crítico</span>
-                                    <span class="material-symbols-outlined text-error">warning</span>
-                                </div>
-                                <h3 class="font-data-tabular text-[26px] font-bold ${kpis.stockCritico > 0 ? 'text-error' : 'text-on-surface'}">${kpis.stockCritico}</h3>
-                                <p class="text-[10px] ${kpis.stockCritico > 0 ? 'text-error' : 'text-on-surface-variant'} mt-2">Existencias debajo del mínimo</p>
-                            </div>
-
-                            <div class="bg-surface-container p-md border border-outline-variant rounded-xl hover:border-primary/50 transition-colors">
-                                <div class="flex justify-between items-start mb-sm">
-                                    <span class="text-on-surface-variant text-label-sm uppercase tracking-widest">Entregados Hoy</span>
-                                    <span class="material-symbols-outlined text-tertiary">check_circle</span>
-                                </div>
-                                <h3 class="font-data-tabular text-[26px] font-bold text-on-surface">${kpis.entregasHoy}</h3>
-                                <p class="text-[10px] text-on-surface-variant mt-2">Ventas finalizadas con éxito</p>
-                            </div>
-                        </div>
-
-                        <!-- Gráfico y Tabla -->
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
-                            <div class="lg:col-span-2 bg-surface-container border border-outline-variant rounded-xl p-lg">
-                                <h4 class="font-headline-md text-on-surface mb-6">Tendencia Semanal de Operaciones</h4>
-                                <div class="h-[200px] w-full relative flex items-end justify-between px-2 pt-10">
-                                    <div class="absolute inset-0 flex flex-col justify-between py-6 text-[10px] text-on-surface-variant opacity-30 font-data-tabular">
-                                        <div class="border-t border-outline-variant w-full pt-1">S/ 15,000</div>
-                                        <div class="border-t border-outline-variant w-full pt-1">S/ 10,000</div>
-                                        <div class="border-t border-outline-variant w-full pt-1">S/ 5,000</div>
-                                        <div class="border-t border-outline-variant w-full pt-1">S/ 0</div>
-                                    </div>
-                                    <!-- Simulación de barras -->
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/20 hover:bg-primary transition-all rounded-t" style="height: 60%;"></div><span class="text-[10px]">LUN</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/20 hover:bg-primary transition-all rounded-t" style="height: 45%;"></div><span class="text-[10px]">MAR</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/40 hover:bg-primary transition-all rounded-t" style="height: 70%;"></div><span class="text-[10px]">MIE</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/20 hover:bg-primary transition-all rounded-t" style="height: 55%;"></div><span class="text-[10px]">JUE</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/30 hover:bg-primary transition-all rounded-t" style="height: 80%;"></div><span class="text-[10px]">VIE</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-secondary-container/60 hover:bg-secondary-container transition-all rounded-t" style="height: 90%;"></div><span class="text-[10px] font-bold">SAB</span></div>
-                                    <div class="flex-1 flex flex-col justify-end items-center gap-2 group z-10"><div class="w-10 bg-primary/20 hover:bg-primary transition-all rounded-t" style="height: 25%;"></div><span class="text-[10px]">DOM</span></div>
-                                </div>
-                            </div>
-
-                            <div class="bg-surface-container border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
-                                <h4 class="font-label-sm uppercase tracking-widest text-on-surface-variant mb-4">Nota de Sistema</h4>
-                                <div class="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
-                                    <h5 class="text-xs font-bold text-primary flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-[16px]">info</span> INICIO RÁPIDO
-                                    </h5>
-                                    <p class="text-xs text-on-surface-variant leading-relaxed">
-                                        Usa la pestaña de <b>Inventario</b> para agregar stock a los productos antes de registrarlos en una venta. Puedes realizar entradas de stock y traslados multi-sucursal de forma atómica.
-                                    </p>
-                                </div>
-                                <div class="mt-4 text-xs text-on-surface-variant">
-                                    Operador activo: <span class="text-on-surface font-bold">${state.nombre}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tabla de Pedidos Recientes -->
-                        <div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden">
-                            <div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
-                                <h4 class="font-headline-md text-on-surface text-lg">Ventas y Pedidos Recientes</h4>
-                                <button onclick="state.currentView='pedidos'; renderView('pedidos');" class="text-primary text-sm font-bold hover:underline">Ver todo</button>
-                            </div>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left">
-                                    <thead class="bg-[#161616]">
-                                        <tr>
-                                            <th class="px-lg py-3 text-[11px] font-label-sm text-on-surface-variant uppercase tracking-wider">Código</th>
-                                            <th class="px-lg py-3 text-[11px] font-label-sm text-on-surface-variant uppercase tracking-wider">Cliente</th>
-                                            <th class="px-lg py-3 text-[11px] font-label-sm text-on-surface-variant uppercase tracking-wider">Estado</th>
-                                            <th class="px-lg py-3 text-[11px] font-label-sm text-on-surface-variant uppercase tracking-wider">Fecha</th>
-                                            <th class="px-lg py-3 text-[11px] font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-outline-variant/30">
-                                        ${pedidos.length === 0 ? `
-                                            <tr>
-                                                <td colspan="5" class="px-lg py-8 text-center text-on-surface-variant text-sm">No se han registrado ventas aún.</td>
-                                            </tr>
-                                        ` : pedidos.slice(0, 5).map(p => `
-                                            <tr class="hover:bg-surface-container-high transition-colors text-sm">
-                                                <td class="px-lg py-4 font-bold text-primary font-data-tabular">${p.codigo}</td>
-                                                <td class="px-lg py-4">${p.cliente}</td>
-                                                <td class="px-lg py-4">
-                                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${getEstadoClase(p.estado)}">
-                                                        ${p.estado}
-                                                    </span>
-                                                </td>
-                                                <td class="px-lg py-4 text-xs text-on-surface-variant">${formatearFecha(p.fecha)}</td>
-                                                <td class="px-lg py-4 font-data-tabular text-right font-bold">S/ ${parseFloat(p.total).toFixed(2)}</td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } catch (err) {
-                container.innerHTML = `<div class="p-6 bg-error-container/20 text-error rounded border border-error/50">Error cargando el Dashboard: ${err.message}</div>`;
-            }
-        }
-
-        // Helper para clases de estado del pedido
-        function getEstadoClase(estado) {
-            switch(estado) {
-                case 'ENTREGADO': return 'bg-green-500/10 text-green-400 border border-green-500/20';
-                case 'CANCELADO': return 'bg-error-container/20 text-error border border-error/30';
-                case 'PENDIENTE': return 'bg-[#3f2e00] text-[#ffdf9a] border border-[#ffdf9a]/20';
-                case 'EN_PREPARACION': return 'bg-secondary-container/10 text-secondary-container border border-secondary-container/20';
-                default: return 'bg-primary-container/10 text-primary border border-primary/20';
-            }
-        }
-
-        function formatearFecha(fechaStr) {
-            const date = new Date(fechaStr);
-            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }
-
-        // 2. VISTA INVENTARIO
-        async function renderInventario(container) {
-            try {
-                // Cargar sucursal activa
-                const sucursalId = state.sucursalId || (state.sucursales.length > 0 ? state.sucursales[0].id : null);
-                
-                if (!sucursalId) {
-                    container.innerHTML = `<div class="p-6 text-center text-on-surface-variant">Debes crear al menos una sucursal en la pestaña de sucursales antes de gestionar existencias.</div>`;
-                    return;
-                }
-
-                const resInv = await fetch(`${API_URL}/api/inventario/sucursal/${sucursalId}`, { headers: getHeaders() });
-                const items = resInv.ok ? await resInv.json() : [];
-
-                container.innerHTML = `
-                    <div class="max-w-[1440px] mx-auto space-y-lg">
-                        <!-- Cabecera -->
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <h2 class="font-headline-lg text-headline-lg text-on-surface">Control de Inventario</h2>
-                                <p class="text-on-surface-variant mt-1">Existencias físicas de stock en sucursal.</p>
-                            </div>
-                            <div class="flex gap-3">
-                                ${state.roles.includes("ROLE_ADMIN") ? `
-                                    <button onclick="mostrarModalTraslado()" class="flex items-center gap-2 px-md py-2 border border-primary text-primary hover:bg-primary-container/5 rounded transition-all font-bold text-sm">
-                                        <span class="material-symbols-outlined text-sm">swap_horiz</span> Trasladar Stock
-                                    </button>
-                                    <button onclick="mostrarModalMovimiento()" class="flex items-center gap-2 px-md py-2 bg-primary text-on-primary hover:opacity-90 rounded transition-all font-bold text-sm">
-                                        <span class="material-symbols-outlined text-sm">add</span> Movimiento Manual
-                                    </button>
-                                ` : ''}
-                            </div>
-                        </div>
-
-                        <!-- Selector de Sucursal (para administradores) -->
-                        <div class="bg-surface-container p-4 border border-outline-variant rounded-xl flex items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <span class="text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Sucursal Activa:</span>
-                                <select id="inventario-sucursal-select" onchange="cambiarSucursalInventario(this.value)" class="bg-[#161616] border border-outline-variant rounded-lg px-4 py-1.5 text-on-surface text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                    ${state.sucursales.map(s => `
-                                        <option value="${s.id}" ${s.id == sucursalId ? 'selected' : ''}>${s.nombre}</option>
-                                    `).join('')}
-                                </select>
-                            </div>
-                            <div class="text-xs text-on-surface-variant">
-                                Mostrando <span class="font-bold text-on-surface">${items.length}</span> registros de existencias.
-                            </div>
-                        </div>
-
-                        <!-- Tabla de Existencias -->
-                        <div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden">
-                            <table class="w-full text-left">
-                                <thead class="bg-[#161616]">
-                                    <tr class="border-b border-outline-variant">
-                                        <th class="px-md py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">SKU</th>
-                                        <th class="px-md py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Producto</th>
-                                        <th class="px-md py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Stock Actual</th>
-                                        <th class="px-md py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-center">Estado de Alerta</th>
-                                        <th class="px-md py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-center">Historial</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-outline-variant/30 text-sm">
-                                    ${items.length === 0 ? `
-                                        <tr>
-                                            <td colspan="5" class="px-md py-8 text-center text-on-surface-variant">No hay productos en inventario para esta sucursal. Realiza un movimiento manual para añadir stock.</td>
-                                        </tr>
-                                    ` : items.map(item => `
-                                        <tr class="hover:bg-surface-container-high transition-colors">
-                                            <td class="px-md py-4 font-data-tabular">${item.productoSku}</td>
-                                            <td class="px-md py-4 font-bold text-on-surface">${item.productoNombre}</td>
-                                            <td class="px-md py-4 font-data-tabular text-right ${item.alertaBajoStock ? 'text-error font-extrabold' : 'text-on-surface font-bold'}">${item.stockActual} u.</td>
-                                            <td class="px-md py-4 text-center">
-                                                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold ${item.alertaBajoStock ? 'bg-error-container/20 text-error' : 'bg-green-500/10 text-green-400'}">
-                                                    ${item.alertaBajoStock ? `Crítico (Mín: ${item.stockMinimo})` : 'Estable'}
-                                                </span>
-                                            </td>
-                                            <td class="px-md py-4 text-center">
-                                                <button onclick="verHistorialMovimientos(${item.id}, '${item.productoNombre}')" class="text-primary hover:text-primary-fixed transition-colors">
-                                                    <span class="material-symbols-outlined text-[18px]">history</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-            } catch (err) {
-                container.innerHTML = `<div class="p-6 bg-error-container/20 text-error rounded border border-error/50">Error cargando Inventario: ${err.message}</div>`;
-            }
-        }
-
-        function cambiarSucursalInventario(val) {
-            state.sucursalId = val;
-            renderView("inventario");
-        }
-
-        // 3. VISTA PEDIDOS Y VENTAS
-        async function renderPedidos(container) {
-            try {
-                const sucursalQuery = state.sucursalId ? `/sucursal/${state.sucursalId}` : "";
-                const resPed = await fetch(`${API_URL}/api/pedidos${sucursalQuery}`, { headers: getHeaders() });
-                const pedidos = resPed.ok ? await resPed.json() : [];
-
-                container.innerHTML = `
-                    <div class="max-w-[1440px] mx-auto space-y-lg">
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <h2 class="font-headline-lg text-headline-lg text-on-surface">Historial de Ventas</h2>
-                                <p class="text-on-surface-variant mt-1">Registro cronológico de pedidos y comprobantes emitidos.</p>
-                            </div>
-                            <button onclick="mostrarModalRegistrarVenta()" class="bg-primary text-on-primary px-lg py-2 rounded-lg font-bold flex items-center gap-2 hover:opacity-80 transition-opacity">
-                                <span class="material-symbols-outlined text-[20px]">add</span>
-                                Registrar Venta
-                            </button>
-                        </div>
-
-                        <div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden">
-                            <table class="w-full text-left">
-                                <thead class="bg-[#161616]">
-                                    <tr class="border-b border-outline-variant">
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Código</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Sucursal</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Cliente</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-center">Estado</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Fecha/Hora</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Total</th>
-                                        <th class="px-lg py-3 text-xs font-label-sm text-on-surface-variant uppercase tracking-wider text-center">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-outline-variant/30 text-sm">
-                                    ${pedidos.length === 0 ? `
-                                        <tr>
-                                            <td colspan="7" class="px-lg py-8 text-center text-on-surface-variant">No hay pedidos registrados en el sistema.</td>
-                                        </tr>
-                                    ` : pedidos.map(p => `
-                                        <tr class="hover:bg-surface-container-high transition-colors">
-                                            <td class="px-lg py-4 font-bold text-primary font-data-tabular">${p.codigo}</td>
-                                            <td class="px-lg py-4 text-xs">${p.sucursalNombre}</td>
-                                            <td class="px-lg py-4">${p.cliente}</td>
-                                            <td class="px-lg py-4 text-center">
-                                                <select onchange="cambiarEstadoPedido(${p.id}, this.value)" class="bg-[#161616] border border-outline-variant rounded px-2 py-0.5 text-xs text-on-surface focus:outline-none">
-                                                    <option value="PENDIENTE" ${p.estado === 'PENDIENTE' ? 'selected' : ''}>PENDIENTE</option>
-                                                    <option value="EN_PREPARACION" ${p.estado === 'EN_PREPARACION' ? 'selected' : ''}>EN_PREPARACION</option>
-                                                    <option value="EN_CAMINO" ${p.estado === 'EN_CAMINO' ? 'selected' : ''}>EN_CAMINO</option>
-                                                    <option value="ENTREGADO" ${p.estado === 'ENTREGADO' ? 'selected' : ''}>ENTREGADO</option>
-                                                    <option value="CANCELADO" ${p.estado === 'CANCELADO' ? 'selected' : ''}>CANCELADO</option>
-                                                </select>
-                                            </td>
-                                            <td class="px-lg py-4 text-xs text-on-surface-variant">${formatearFecha(p.fecha)}</td>
-                                            <td class="px-lg py-4 font-data-tabular text-right font-bold text-on-surface">S/ ${parseFloat(p.total).toFixed(2)}</td>
-                                            <td class="px-lg py-4 text-center">
-                                                <button onclick="verDetallePedido(${p.id})" class="text-primary hover:text-primary-fixed transition-colors">
-                                                    <span class="material-symbols-outlined text-[18px]">visibility</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-            } catch (err) {
-                container.innerHTML = `<div class="p-6 bg-error-container/20 text-error rounded border border-error/50">Error cargando Pedidos: ${err.message}</div>`;
-            }
-        }
-
-        async function cambiarEstadoPedido(id, nuevoEstado) {
-            try {
-                const response = await fetch(`${API_URL}/api/pedidos/${id}/estado?nuevoEstado=${nuevoEstado}`, {
-                    method: "PUT",
-                    headers: getHeaders()
-                });
-                if (!response.ok) {
-                    alert("No se pudo actualizar el estado del pedido.");
-                    renderView("pedidos");
-                }
-            } catch (err) {
-                alert("Error al realizar la actualización.");
-                renderView("pedidos");
-            }
-        }
-
-        // 4. VISTA CATÁLOGO
-        async function renderCatalogo(container) {
-            try {
-                const resProd = await fetch(`${API_URL}/api/productos`, { headers: getHeaders() });
-                const productos = resProd.ok ? await resProd.json() : [];
-
-                const resCat = await fetch(`${API_URL}/api/categorias`, { headers: getHeaders() });
-                state.categorias = resCat.ok ? await resCat.json() : [];
-
-                container.innerHTML = `
-                    <div class="max-w-[1440px] mx-auto space-y-lg">
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <h2 class="font-headline-lg text-headline-lg text-on-surface">Catálogo de Productos</h2>
-                                <p class="text-on-surface-variant mt-1">Gestión centralizada de SKU, precios de venta y categorías.</p>
-                            </div>
-                            <div class="flex gap-3">
-                                ${state.roles.includes("ROLE_ADMIN") ? `
-                                    <button onclick="mostrarModalNuevaCategoria()" class="flex items-center gap-2 px-md py-2 border border-primary text-primary hover:bg-primary-container/5 rounded transition-all font-bold text-sm">
-                                        <span class="material-symbols-outlined text-sm">category</span> Nueva Categoría
-                                    </button>
-                                    <button onclick="mostrarModalNuevoProducto()" class="flex items-center gap-2 px-md py-2 bg-primary text-on-primary hover:opacity-90 rounded transition-all font-bold text-sm">
-                                        <span class="material-symbols-outlined text-sm">add</span> Nuevo Producto
-                                    </button>
-                                ` : ''}
-                            </div>
-                        </div>
-
-                        <!-- Grilla de Productos -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
-                            ${productos.length === 0 ? `
-                                <div class="col-span-full py-16 text-center text-on-surface-variant">No hay productos registrados en el catálogo. Clic en "Nuevo Producto" para iniciar.</div>
-                            ` : productos.map(p => `
-                                <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden hover:border-primary/50 transition-all flex flex-col justify-between">
-                                    <div class="p-md space-y-3">
-                                        <div class="flex justify-between items-start">
-                                            <span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase border border-primary/20">${p.categoriaNombre}</span>
-                                            <span class="text-xs font-data-tabular text-on-surface-variant">${p.sku}</span>
-                                        </div>
-                                        <h3 class="font-bold text-on-surface text-base">${p.nombre}</h3>
-                                        <p class="text-xs text-on-surface-variant line-clamp-2">${p.descripcion || 'Sin descripción'}</p>
-                                    </div>
-                                    <div class="p-md pt-0 border-t border-outline-variant/30 mt-auto bg-surface-container/20">
-                                        <div class="flex justify-between items-center py-3">
-                                            <span class="text-xs text-on-surface-variant">Precio Venta</span>
-                                            <span class="font-data-tabular font-bold text-primary">S/ ${parseFloat(p.precio).toFixed(2)}</span>
-                                        </div>
-                                        ${state.roles.includes("ROLE_ADMIN") ? `
-                                            <div class="flex gap-2">
-                                                <button onclick="mostrarModalEditarProducto(${p.id}, '${p.sku}', '${p.nombre}', '${p.descripcion.replace(/'/g, "\\'")}', ${p.precio}, ${p.stockMinimo}, ${p.categoriaId})" class="flex-1 py-1.5 rounded border border-outline-variant/50 hover:bg-surface-container-high text-xs transition-colors">Editar</button>
-                                                <button onclick="eliminarProducto(${p.id})" class="py-1.5 px-2 rounded border border-error/50 text-error hover:bg-error/10 text-xs transition-colors"><span class="material-symbols-outlined text-xs">delete</span></button>
-                                            </div>
-                                        ` : ''}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            } catch (err) {
-                container.innerHTML = `<div class="p-6 bg-error-container/20 text-error rounded border border-error/50">Error cargando Catálogo: ${err.message}</div>`;
-            }
-        }
-
-        // 5. VISTA SUCURSALES
-        async function renderSucursales(container) {
-            try {
-                container.innerHTML = `
-                    <div class="max-w-[1440px] mx-auto space-y-lg">
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <h2 class="font-headline-lg text-headline-lg text-on-surface">Gestión de Sucursales</h2>
-                                <p class="text-on-surface-variant mt-1">Locales comerciales de Tambo registrados.</p>
-                            </div>
-                            ${state.roles.includes("ROLE_ADMIN") ? `
-                                <button onclick="mostrarModalNuevaSucursal()" class="bg-primary text-on-primary px-lg py-2 rounded-lg font-bold flex items-center gap-2 hover:opacity-80 transition-opacity">
-                                    <span class="material-symbols-outlined text-[20px]">add</span>
-                                    Nueva Sucursal
+                            ${isAdmin ? `
+                                <button onclick="abrirModalProducto()" class="bg-primary text-on-primary font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">add</span> Nuevo Producto
                                 </button>
                             ` : ''}
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-                            ${state.sucursales.length === 0 ? `
-                                <div class="col-span-full py-16 text-center text-on-surface-variant">No hay sucursales registradas.</div>
-                            ` : state.sucursales.map(s => `
-                                <div class="bg-surface-container border border-outline-variant p-lg rounded-xl flex flex-col justify-between space-y-4">
-                                    <div class="space-y-2">
-                                        <div class="flex items-center gap-3">
-                                            <span class="material-symbols-outlined text-primary text-2xl">storefront</span>
-                                            <h3 class="font-bold text-on-surface text-lg">${s.nombre}</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="productos-list">
+                            ${state.productos.map(p => `
+                                <div class="bg-[#1c1c1c] border border-outline-variant/40 rounded-xl p-5 hover:border-primary/40 transition-colors flex flex-col justify-between space-y-4">
+                                    <div>
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-bold text-lg text-on-surface leading-tight">${p.nombre}</h3>
+                                            <span class="font-mono font-bold text-secondary-container text-md">S/ ${parseFloat(p.precio).toFixed(2)}</span>
                                         </div>
-                                        <p class="text-xs text-on-surface-variant"><span class="font-bold">Dirección:</span> ${s.direccion}</p>
-                                        <p class="text-xs text-on-surface-variant"><span class="font-bold">Teléfono:</span> ${s.telefono || 'Sin teléfono'}</p>
+                                        <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">${p.descripcion || 'Sin descripción disponible.'}</p>
                                     </div>
-                                    ${state.roles.includes("ROLE_ADMIN") ? `
-                                        <div class="flex gap-2 border-t border-outline-variant/30 pt-3">
-                                            <button onclick="mostrarModalEditarSucursal(${s.id}, '${s.nombre}', '${s.direccion}', '${s.telefono || ''}')" class="flex-1 py-1 text-xs border border-outline-variant/50 hover:bg-surface-container-high rounded transition-colors">Editar</button>
-                                            <button onclick="eliminarSucursal(${s.id})" class="px-2 py-1 border border-error/50 hover:bg-error/10 rounded text-error text-xs transition-colors"><span class="material-symbols-outlined text-xs">delete</span></button>
+                                    <div class="pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+                                        <div>
+                                            <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Stock Disponible</p>
+                                            <p class="font-mono text-base font-bold ${p.stock <= 10 ? 'text-red-400' : 'text-green-400'}">${p.stock} unidades</p>
                                         </div>
-                                    ` : ''}
+                                        <div class="flex gap-2">
+                                            ${isAdmin ? `
+                                                <button onclick="abrirModalProducto(${p.id})" class="text-on-surface-variant hover:text-primary p-1 transition-colors"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                                <button onclick="eliminarProducto(${p.id})" class="text-on-surface-variant hover:text-error p-1 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                            ` : `
+                                                <button onclick="abrirModalPedido(${p.id})" class="bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold px-3 py-1.5 rounded transition-all">Pedir</button>
+                                            `}
+                                        </div>
+                                    </div>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
                 `;
             } catch (err) {
-                container.innerHTML = `<div class="p-6 bg-error-container/20 text-error rounded border border-error/50">Error cargando Sucursales: ${err.message}</div>`;
+                container.innerHTML = `<div class="p-4 bg-red-950/20 text-red-200 border border-red-500/30 rounded">Error: ${err.message}</div>`;
             }
         }
 
-        // ==================== LÓGICA DE MODALES (INYECCIÓN HTML Y ENVÍO DE FORMULARIOS) ====================
+        async function realizarBusqueda(q) {
+            if (state.currentView !== "productos") return;
+            const container = document.getElementById("productos-list");
+            if (!container) return;
 
-        function abrirModal(html) {
-            const modal = document.getElementById("modal-container");
-            modal.innerHTML = html;
-            modal.classList.remove("hidden");
-        }
-
-        function cerrarModal() {
-            document.getElementById("modal-container").classList.add("hidden");
-        }
-
-        // 1. MODAL: REGISTRAR VENTA/PEDIDO
-        async function mostrarModalRegistrarVenta() {
-            // Cargar productos activos
             try {
-                const resProd = await fetch(`${API_URL}/api/productos/activos`, { headers: getHeaders() });
-                const productosActivos = resProd.ok ? await resProd.json() : [];
+                const res = await fetch(`${API_URL}/api/productos/buscar?nombre=${encodeURIComponent(q)}`, { headers: getHeaders() });
+                const filtered = res.ok ? await res.json() : [];
+                const isAdmin = state.roles.includes("ROLE_ADMIN");
 
-                const sucursalId = state.sucursalId || (state.sucursales.length > 0 ? state.sucursales[0].id : 1);
-
-                abrirModal(`
-                    <div class="bg-surface-container border border-outline-variant w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-                        <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                            <h3 class="font-bold text-on-surface text-lg">Registrar Nueva Venta</h3>
-                            <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
+                container.innerHTML = filtered.length === 0 ? `<div class="col-span-full py-8 text-center text-on-surface-variant text-xs">No se encontraron productos con ese nombre.</div>` : filtered.map(p => `
+                    <div class="bg-[#1c1c1c] border border-outline-variant/40 rounded-xl p-5 hover:border-primary/40 transition-colors flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-bold text-lg text-on-surface leading-tight">${p.nombre}</h3>
+                                <span class="font-mono font-bold text-secondary-container text-md">S/ ${parseFloat(p.precio).toFixed(2)}</span>
+                            </div>
+                            <p class="text-on-surface-variant text-xs mt-2 leading-relaxed">${p.descripcion || 'Sin descripción disponible.'}</p>
                         </div>
-                        <form id="registrar-venta-form" class="p-lg overflow-y-auto space-y-4 custom-scrollbar">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Cliente</label>
-                                    <input type="text" id="venta-cliente" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Nombre del cliente"/>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Sucursal de Venta</label>
-                                    <select id="venta-sucursal" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                        ${state.sucursales.map(s => `
-                                            <option value="${s.id}" ${s.id == sucursalId ? 'selected' : ''}>${s.nombre}</option>
-                                        `).join('')}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Comprobante</label>
-                                    <select id="venta-comprobante" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary">
-                                        <option value="BOLETA">BOLETA</option>
-                                        <option value="FACTURA">FACTURA</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Método de Pago</label>
-                                    <select id="venta-pago" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary">
-                                        <option value="EFECTIVO">EFECTIVO</option>
-                                        <option value="TARJETA">TARJETA</option>
-                                        <option value="YAPE_PLIN">YAPE / PLIN</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Listado de items a agregar -->
-                            <div class="border-t border-outline-variant/30 pt-3 space-y-2">
-                                <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Productos del Pedido</h4>
-                                <div id="venta-items-container" class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-2">
-                                    <!-- Aquí se inyectan las filas -->
-                                </div>
-                                <button type="button" onclick="agregarFilaVenta()" class="flex items-center gap-1.5 text-xs text-primary font-bold hover:underline">
-                                    <span class="material-symbols-outlined text-[16px]">add</span> Añadir Producto
-                                </button>
-                            </div>
-
-                            <div id="venta-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-
-                            <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                                <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                                <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Confirmar Venta</button>
-                            </div>
-                        </form>
-                    </div>
-                `);
-
-                // Inicializar con la lista de productos activos a nivel global para reutilizar
-                window.prodActivos = productosActivos;
-                agregarFilaVenta();
-
-                // Enviar venta
-                document.getElementById("registrar-venta-form").addEventListener("submit", async (e) => {
-                    e.preventDefault();
-                    document.getElementById("venta-error").classList.add("hidden");
-
-                    const cliente = document.getElementById("venta-cliente").value;
-                    const sucursalId = parseInt(document.getElementById("venta-sucursal").value);
-                    const tipoComprobante = document.getElementById("venta-comprobante").value;
-                    const metodoPago = document.getElementById("venta-pago").value;
-
-                    // Mapear los items seleccionados
-                    const detalles = [];
-                    const filas = document.querySelectorAll(".venta-item-row");
-                    let valid = true;
-
-                    filas.forEach(fila => {
-                        const prodId = fila.querySelector(".prod-select").value;
-                        const cant = parseInt(fila.querySelector(".prod-cant").value);
-                        if (!prodId) {
-                            valid = false;
-                            return;
-                        }
-                        detalles.push({ productoId: parseInt(prodId), cantidad: cant });
-                    });
-
-                    if (!valid || detalles.length === 0) {
-                        const err = document.getElementById("venta-error");
-                        err.innerText = "Por favor selecciona al menos un producto válido.";
-                        err.classList.remove("hidden");
-                        return;
-                    }
-
-                    try {
-                        const response = await fetch(`${API_URL}/api/pedidos`, {
-                            method: "POST",
-                            headers: getHeaders(),
-                            body: JSON.stringify({ cliente, sucursalId, detalles, tipoComprobante, metodoPago })
-                        });
-
-                        if (response.ok) {
-                            cerrarModal();
-                            renderView(state.currentView);
-                        } else {
-                            const errData = await response.json();
-                            const err = document.getElementById("venta-error");
-                            err.innerText = errData.message || "No se pudo completar la venta. Verifica el stock.";
-                            err.classList.remove("hidden");
-                        }
-                    } catch (err) {
-                        const errorDiv = document.getElementById("venta-error");
-                        errorDiv.innerText = "Error de red al procesar la venta.";
-                        errorDiv.classList.remove("hidden");
-                    }
-                });
-
-            } catch (err) {
-                alert("Error cargando productos activos: " + err.message);
-            }
-        }
-
-        function agregarFilaVenta() {
-            const container = document.getElementById("venta-items-container");
-            const index = container.children.length;
-            const div = document.createElement("div");
-            div.className = "venta-item-row flex items-center gap-3 bg-surface-container-low p-2 rounded border border-outline-variant/30";
-            div.innerHTML = `
-                <select class="prod-select flex-1 bg-[#161616] border border-outline-variant rounded px-2 py-1 text-xs focus:outline-none">
-                    <option value="">-- Selecciona Producto --</option>
-                    ${window.prodActivos.map(p => `
-                        <option value="${p.id}">${p.nombre} (SKU: ${p.sku}) - S/ ${parseFloat(p.precio).toFixed(2)}</option>
-                    `).join('')}
-                </select>
-                <div class="flex items-center gap-2 w-28">
-                    <span class="text-xs text-on-surface-variant font-bold">Cant:</span>
-                    <input type="number" min="1" value="1" class="prod-cant w-16 bg-[#161616] border border-outline-variant rounded px-2 py-1 text-xs text-center focus:outline-none"/>
-                </div>
-                <button type="button" onclick="this.parentElement.remove()" class="text-error hover:scale-105"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-            `;
-            container.appendChild(div);
-        }
-
-        // 2. MODAL: MOVIMIENTO MANUAL
-        async function mostrarModalMovimiento() {
-            // Cargar todos los productos
-            try {
-                const resProd = await fetch(`${API_URL}/api/productos`, { headers: getHeaders() });
-                const productos = resProd.ok ? await resProd.json() : [];
-
-                abrirModal(`
-                    <div class="bg-surface-container border border-outline-variant w-full max-w-md rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                        <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                            <h3 class="font-bold text-on-surface text-lg">Registrar Movimiento de Stock</h3>
-                            <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                        </div>
-                        <form id="movimiento-form" class="p-lg space-y-4">
+                        <div class="pt-4 border-t border-outline-variant/20 flex justify-between items-center">
                             <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Sucursal</label>
-                                <select id="mov-sucursal" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                    ${state.sucursales.map(s => `
-                                        <option value="${s.id}" ${s.id == state.sucursalId ? 'selected' : ''}>${s.nombre}</option>
+                                <p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Stock Disponible</p>
+                                <p class="font-mono text-base font-bold ${p.stock <= 10 ? 'text-red-400' : 'text-green-400'}">${p.stock} unidades</p>
+                            </div>
+                            <div class="flex gap-2">
+                                ${isAdmin ? `
+                                    <button onclick="abrirModalProducto(${p.id})" class="text-on-surface-variant hover:text-primary p-1 transition-colors"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                    <button onclick="eliminarProducto(${p.id})" class="text-on-surface-variant hover:text-error p-1 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                ` : `
+                                    <button onclick="abrirModalPedido(${p.id})" class="bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold px-3 py-1.5 rounded transition-all">Pedir</button>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // ==================== VISTA PEDIDOS ====================
+        async function renderPedidos(container) {
+            try {
+                const res = await fetch(`${API_URL}/api/pedidos`, { headers: getHeaders() });
+                state.pedidos = res.ok ? await res.json() : [];
+
+                container.innerHTML = `
+                    <div class="max-w-6xl mx-auto space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-on-surface">Historial de Pedidos</h2>
+                            <p class="text-on-surface-variant text-xs mt-1">Registro cronológico de las compras de productos del inventario.</p>
+                        </div>
+
+                        <div class="bg-[#1c1c1c] border border-outline-variant/30 rounded-xl overflow-hidden shadow-lg">
+                            <table class="w-full text-left">
+                                <thead class="bg-[#242424] border-b border-outline-variant/30 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                                    <tr>
+                                        <th class="px-6 py-4">ID</th>
+                                        <th class="px-6 py-4">Empleado/Usuario</th>
+                                        <th class="px-6 py-4">Producto</th>
+                                        <th class="px-6 py-4 text-center">Cantidad</th>
+                                        <th class="px-6 py-4">Fecha</th>
+                                        <th class="px-6 py-4 text-right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant/20 text-xs">
+                                    ${state.pedidos.length === 0 ? `
+                                        <tr>
+                                            <td colspan="6" class="px-6 py-8 text-center text-on-surface-variant">No se han registrado pedidos aún.</td>
+                                        </tr>
+                                    ` : state.pedidos.map(p => `
+                                        <tr class="hover:bg-white/5 transition-colors">
+                                            <td class="px-6 py-4 font-mono font-bold text-primary">#${p.id}</td>
+                                            <td class="px-6 py-4 font-semibold">${p.usuarioNombre}</td>
+                                            <td class="px-6 py-4 font-bold text-on-surface">${p.productoNombre}</td>
+                                            <td class="px-6 py-4 text-center font-mono">${p.cantidad} u.</td>
+                                            <td class="px-6 py-4 text-on-surface-variant">${new Date(p.fecha).toLocaleString()}</td>
+                                            <td class="px-6 py-4 text-right font-mono font-bold text-secondary-container">S/ ${parseFloat(p.total).toFixed(2)}</td>
+                                        </tr>
                                     `).join('')}
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Producto</label>
-                                <select id="mov-producto" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                    <option value="">-- Selecciona Producto --</option>
-                                    ${productos.map(p => `<option value="${p.id}">${p.nombre} (SKU: ${p.sku})</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Tipo Movimiento</label>
-                                    <select id="mov-tipo" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary">
-                                        <option value="ENTRADA">ENTRADA (Suma stock)</option>
-                                        <option value="SALIDA">SALIDA (Resta stock)</option>
-                                        <option value="AJUSTE">AJUSTE (Fija stock actual)</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Cantidad / Valor</label>
-                                    <input type="number" id="mov-cantidad" min="1" value="1" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Motivo / Observación</label>
-                                <input type="text" id="mov-motivo" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary placeholder-on-surface-variant/30" placeholder="Ej: Ingreso por compra, ajuste de inventario real"/>
-                            </div>
-
-                            <div id="mov-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-
-                            <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                                <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                                <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Registrar</button>
-                            </div>
-                        </form>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                `);
+                `;
+            } catch (err) {
+                container.innerHTML = `<div class="p-4 bg-red-950/20 text-red-200 border border-red-500/30 rounded">Error: ${err.message}</div>`;
+            }
+        }
 
-                document.getElementById("movimiento-form").addEventListener("submit", async (e) => {
-                    e.preventDefault();
-                    document.getElementById("mov-error").classList.add("hidden");
+        // ==================== VISTA USUARIOS (ADMIN) ====================
+        async function renderUsuarios(container) {
+            try {
+                const res = await fetch(`${API_URL}/usuarios`, { headers: getHeaders() });
+                state.usuarios = res.ok ? await res.json() : [];
 
-                    const sucursalId = parseInt(document.getElementById("mov-sucursal").value);
-                    const productoId = parseInt(document.getElementById("mov-producto").value);
-                    const tipo = document.getElementById("mov-tipo").value;
-                    const cantidad = parseInt(document.getElementById("mov-cantidad").value);
-                    const motivo = document.getElementById("mov-motivo").value;
+                container.innerHTML = `
+                    <div class="max-w-6xl mx-auto space-y-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="text-2xl font-bold text-on-surface">Gestión de Usuarios</h2>
+                                <p class="text-on-surface-variant text-xs mt-1">Control de accesos y administración de roles del sistema.</p>
+                            </div>
+                            <button onclick="abrirModalUsuario()" class="bg-primary text-on-primary font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">person_add</span> Nuevo Usuario
+                            </button>
+                        </div>
 
-                    try {
-                        const response = await fetch(`${API_URL}/api/inventario/movimientos`, {
-                            method: "POST",
-                            headers: getHeaders(),
-                            body: JSON.stringify({ sucursalId, productoId, tipo, cantidad, motivo })
-                        });
+                        <div class="bg-[#1c1c1c] border border-outline-variant/30 rounded-xl overflow-hidden shadow-lg">
+                            <table class="w-full text-left">
+                                <thead class="bg-[#242424] border-b border-outline-variant/30 text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                                    <tr>
+                                        <th class="px-6 py-4">ID</th>
+                                        <th class="px-6 py-4">Username</th>
+                                        <th class="px-6 py-4">Nombre Completo</th>
+                                        <th class="px-6 py-4">Correo</th>
+                                        <th class="px-6 py-4">Roles</th>
+                                        <th class="px-6 py-4 text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant/20 text-xs">
+                                    ${state.usuarios.map(u => `
+                                        <tr class="hover:bg-white/5 transition-colors">
+                                            <td class="px-6 py-4 font-mono">#${u.id}</td>
+                                            <td class="px-6 py-4 font-bold text-primary">${u.username}</td>
+                                            <td class="px-6 py-4 font-semibold text-on-surface">${u.nombre}</td>
+                                            <td class="px-6 py-4 text-on-surface-variant">${u.correo}</td>
+                                            <td class="px-6 py-4">
+                                                <span class="inline-flex px-2 py-0.5 rounded text-[10px] font-bold ${u.roles.includes('ROLE_ADMIN') ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300'}">
+                                                    ${u.roles.includes('ROLE_ADMIN') ? 'ADMIN' : 'USER (Empleado)'}
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 text-center space-x-2">
+                                                <button onclick="abrirModalUsuario(${u.id})" class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                                <button onclick="eliminarUsuario(${u.id})" class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<div class="p-4 bg-red-950/20 text-red-200 border border-red-500/30 rounded">Error: ${err.message}</div>`;
+            }
+        }
 
-                        if (response.ok) {
-                            cerrarModal();
-                            renderView("inventario");
-                        } else {
-                            const errData = await response.json();
-                            const err = document.getElementById("mov-error");
-                            err.innerText = errData.message || "Error al registrar movimiento.";
-                            err.classList.remove("hidden");
-                        }
-                    } catch (err) {
-                        const errorDiv = document.getElementById("mov-error");
-                        errorDiv.innerText = "Error de conexión.";
-                        errorDiv.classList.remove("hidden");
-                    }
+        // ==================== EVENTOS Y ENVIOS DE INFORMACION ====================
+        
+        // MODAL PRODUCTO (ADMIN)
+        function abrirModalProducto(id = null) {
+            const prod = id ? state.productos.find(p => p.id === id) : null;
+            const modal = document.getElementById("modal-container");
+
+            modal.innerHTML = `
+                <div class="w-full max-w-md bg-surface-container border border-outline-variant p-6 rounded-xl space-y-4">
+                    <h3 class="text-lg font-bold text-primary">${prod ? 'Editar Producto' : 'Agregar Nuevo Producto'}</h3>
+                    <form id="modal-producto-form" class="space-y-3">
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
+                            <input type="text" id="m-p-nombre" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="${prod ? prod.nombre : ''}"/>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Descripción</label>
+                            <textarea id="m-p-desc" class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" rows="2">${prod ? prod.descripcion : ''}</textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Precio (S/)</label>
+                                <input type="number" step="0.01" id="m-p-precio" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="${prod ? prod.precio : ''}"/>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Stock</label>
+                                <input type="number" id="m-p-stock" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="${prod ? prod.stock : ''}"/>
+                            </div>
+                        </div>
+                        <div class="flex justify-end gap-2 pt-4">
+                            <button type="button" onclick="cerrarModal()" class="border border-outline-variant/65 text-on-surface-variant px-4 py-2 rounded text-xs hover:bg-white/5 transition-colors">Cancelar</button>
+                            <button type="submit" class="bg-primary text-on-primary font-bold px-4 py-2 rounded text-xs hover:opacity-90">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            modal.classList.remove("hidden");
+
+            document.getElementById("modal-producto-form").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const data = {
+                    nombre: document.getElementById("m-p-nombre").value,
+                    descripcion: document.getElementById("m-p-desc").value,
+                    precio: parseFloat(document.getElementById("m-p-precio").value),
+                    stock: parseInt(document.getElementById("m-p-stock").value)
+                };
+
+                const url = prod ? `${API_URL}/admin/productos/${prod.id}` : `${API_URL}/admin/productos`;
+                const method = prod ? "PUT" : "POST";
+
+                const res = await fetch(url, {
+                    method: method,
+                    headers: getHeaders(),
+                    body: JSON.stringify(data)
                 });
 
-            } catch (err) {
-                alert("Error: " + err.message);
-            }
-        }
-
-        // 3. MODAL: TRASLADO ATÓMICO
-        async function mostrarModalTraslado() {
-            try {
-                const resProd = await fetch(`${API_URL}/api/productos`, { headers: getHeaders() });
-                const productos = resProd.ok ? await resProd.json() : [];
-
-                abrirModal(`
-                    <div class="bg-surface-container border border-outline-variant w-full max-w-md rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                        <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                            <h3 class="font-bold text-on-surface text-lg">Trasladar Stock entre Sucursales</h3>
-                            <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                        </div>
-                        <form id="traslado-form" class="p-lg space-y-4">
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Producto</label>
-                                <select id="tras-producto" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                    <option value="">-- Selecciona Producto --</option>
-                                    ${productos.map(p => `<option value="${p.id}">${p.nombre} (SKU: ${p.sku})</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Sucursal Origen</label>
-                                    <select id="tras-origen" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary">
-                                        ${state.sucursales.map(s => `<option value="${s.id}" ${s.id == state.sucursalId ? 'selected' : ''}>${s.nombre}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Sucursal Destino</label>
-                                    <select id="tras-destino" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary">
-                                        ${state.sucursales.map(s => `<option value="${s.id}" ${s.id != state.sucursalId ? 'selected' : ''}>${s.nombre}</option>`).join('')}
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Cantidad a trasladar</label>
-                                <input type="number" id="tras-cantidad" min="1" value="1" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Motivo</label>
-                                <input type="text" id="tras-motivo" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary placeholder-on-surface-variant/30" placeholder="Ej: Reabastecimiento de local"/>
-                            </div>
-
-                            <div id="tras-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-
-                            <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                                <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                                <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Confirmar Traslado</button>
-                            </div>
-                        </form>
-                    </div>
-                `);
-
-                document.getElementById("traslado-form").addEventListener("submit", async (e) => {
-                    e.preventDefault();
-                    document.getElementById("tras-error").classList.add("hidden");
-
-                    const productoId = parseInt(document.getElementById("tras-producto").value);
-                    const sucursalOrigenId = parseInt(document.getElementById("tras-origen").value);
-                    const sucursalDestinoId = parseInt(document.getElementById("tras-destino").value);
-                    const cantidad = parseInt(document.getElementById("tras-cantidad").value);
-                    const motivo = document.getElementById("tras-motivo").value;
-
-                    try {
-                        const response = await fetch(`${API_URL}/api/inventario/traslados`, {
-                            method: "POST",
-                            headers: getHeaders(),
-                            body: JSON.stringify({ productoId, sucursalOrigenId, sucursalDestinoId, cantidad, motivo })
-                        });
-
-                        if (response.ok) {
-                            cerrarModal();
-                            renderView("inventario");
-                        } else {
-                            const errData = await response.json();
-                            const err = document.getElementById("tras-error");
-                            err.innerText = errData.message || "Error al realizar el traslado. Verifica el stock origen.";
-                            err.classList.remove("hidden");
-                        }
-                    } catch (err) {
-                        const errorDiv = document.getElementById("tras-error");
-                        errorDiv.innerText = "Error de red.";
-                        errorDiv.classList.remove("hidden");
-                    }
-                });
-
-            } catch (err) {
-                alert("Error: " + err.message);
-            }
-        }
-
-        // 4. VER HISTORIAL DE MOVIMIENTOS
-        async function verHistorialMovimientos(inventarioId, productoNombre) {
-            try {
-                // Haremos una búsqueda sobre los movimientos. Como no tenemos filtro específico por inventarioId mapeado directamente 
-                // en el controlador con su propia ruta (/api/inventario/movimientos/sucursal/{sucursalId} nos da todos los de la sucursal),
-                // podemos llamar al historial de movimientos globales y filtrar en memoria por productoNombre/ID.
-                // Es extremadamente confiable.
-                const resMov = await fetch(`${API_URL}/api/inventario/movimientos`, { headers: getHeaders() });
-                const movimientos = resMov.ok ? await resMov.json() : [];
-
-                const filtrados = movimientos.filter(m => m.productoId == inventarioId || m.productoNombre === productoNombre);
-
-                abrirModal(`
-                    <div class="bg-surface-container border border-outline-variant w-full max-w-xl rounded-xl overflow-hidden shadow-2xl flex flex-col max-h-[80vh]">
-                        <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                            <h3 class="font-bold text-on-surface text-lg">Kardex de Auditoría: ${productoNombre}</h3>
-                            <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                        </div>
-                        <div class="p-lg overflow-y-auto space-y-3 custom-scrollbar">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-xs">
-                                    <thead>
-                                        <tr class="border-b border-outline-variant/30 text-on-surface-variant font-label-sm uppercase">
-                                            <th class="py-2">Fecha/Hora</th>
-                                            <th class="py-2">Tipo</th>
-                                            <th class="py-2 text-right">Cant.</th>
-                                            <th class="py-2">Sucursal</th>
-                                            <th class="py-2">Operador</th>
-                                            <th class="py-2">Motivo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${filtrados.length === 0 ? `
-                                            <tr>
-                                                <td colspan="6" class="py-4 text-center text-on-surface-variant">No se registran movimientos para este producto.</td>
-                                            </tr>
-                                        ` : filtrados.map(m => `
-                                            <tr class="border-b border-outline-variant/20 hover:bg-surface-container-high/40 transition-colors">
-                                                <td class="py-3 font-data-tabular text-on-surface-variant">${formatearFecha(m.fecha)}</td>
-                                                <td class="py-3 font-bold ${m.tipo === 'ENTRADA' ? 'text-green-400' : m.tipo === 'SALIDA' ? 'text-error' : 'text-secondary-container'}">${m.tipo}</td>
-                                                <td class="py-3 font-data-tabular text-right font-bold">${m.cantidad} u.</td>
-                                                <td class="py-3 text-[10px] text-on-surface-variant">${m.sucursalNombre}</td>
-                                                <td class="py-3 text-[10px] text-on-surface-variant">${m.username}</td>
-                                                <td class="py-3 text-[10px] text-on-surface-variant max-w-[120px] truncate" title="${m.motivo}">${m.motivo}</td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-background border-t border-outline-variant/30 flex justify-end">
-                            <button onclick="cerrarModal()" class="px-4 py-1.5 bg-primary text-on-primary rounded font-bold text-xs hover:opacity-90">Aceptar</button>
-                        </div>
-                    </div>
-                `);
-
-            } catch (err) {
-                alert("Error cargando historial de movimientos: " + err.message);
-            }
-        }
-
-        // 5. MODAL: DETALLE PEDIDO
-        async function verDetallePedido(id) {
-            try {
-                const res = await fetch(`${API_URL}/api/pedidos/${id}`, { headers: getHeaders() });
-                if (!res.ok) throw new Error("No se pudo obtener el pedido");
-                const p = await res.json();
-
-                abrirModal(`
-                    <div class="bg-surface-container border border-outline-variant w-full max-w-xl rounded-xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
-                        <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <h3 class="font-bold text-on-surface text-lg">Detalle del Pedido ${p.codigo}</h3>
-                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${getEstadoClase(p.estado)}">${p.estado}</span>
-                            </div>
-                            <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                        </div>
-                        <div class="p-lg overflow-y-auto space-y-4 custom-scrollbar text-sm">
-                            <div class="grid grid-cols-2 gap-4 border-b border-outline-variant/30 pb-3 text-xs text-on-surface-variant">
-                                <div>
-                                    <p><span class="font-bold text-on-surface">Cliente:</span> ${p.cliente}</p>
-                                    <p class="mt-1"><span class="font-bold text-on-surface">Sucursal:</span> ${p.sucursalNombre}</p>
-                                </div>
-                                <div class="text-right">
-                                    <p><span class="font-bold text-on-surface">Fecha:</span> ${formatearFecha(p.fecha)}</p>
-                                    <p class="mt-1"><span class="font-bold text-on-surface">Cajero:</span> ${p.username}</p>
-                                </div>
-                            </div>
-                            
-                            <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Items Comprados</h4>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-xs">
-                                    <thead>
-                                        <tr class="border-b border-outline-variant/30 text-on-surface-variant font-label-sm">
-                                            <th class="py-2">SKU</th>
-                                            <th class="py-2">Producto</th>
-                                            <th class="py-2 text-right">Precio Unit.</th>
-                                            <th class="py-2 text-center">Cant.</th>
-                                            <th class="py-2 text-right">Subtotal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${p.detalles.map(d => `
-                                            <tr class="border-b border-outline-variant/10">
-                                                <td class="py-2 font-data-tabular">${d.productoSku}</td>
-                                                <td class="py-2 font-bold">${d.productoNombre}</td>
-                                                <td class="py-2 font-data-tabular text-right">S/ ${parseFloat(d.precioUnitario).toFixed(2)}</td>
-                                                <td class="py-2 font-data-tabular text-center">${d.cantidad}</td>
-                                                <td class="py-2 font-data-tabular text-right font-bold text-on-surface">S/ ${parseFloat(d.subtotal).toFixed(2)}</td>
-                                            </tr>
-                                        `).join('')}
-                                        <tr class="font-bold text-sm">
-                                            <td colspan="4" class="py-3 text-right text-on-surface-variant">TOTAL:</td>
-                                            <td class="py-3 text-right text-primary font-data-tabular">S/ ${parseFloat(p.total).toFixed(2)}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-background border-t border-outline-variant/30 flex justify-end">
-                            <button onclick="cerrarModal()" class="px-4 py-1.5 bg-primary text-on-primary rounded font-bold text-xs hover:opacity-90">Cerrar</button>
-                        </div>
-                    </div>
-                `);
-            } catch (err) {
-                alert("Error cargando detalles del pedido.");
-            }
-        }
-
-        // 6. MODALES: PRODUCTOS & CATEGORÍAS (CRUD)
-        function mostrarModalNuevaCategoria() {
-            abrirModal(`
-                <div class="bg-surface-container border border-outline-variant w-full max-w-sm rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                    <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                        <h3 class="font-bold text-on-surface text-lg">Nueva Categoría</h3>
-                        <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                    </div>
-                    <form id="nueva-categoria-form" class="p-lg space-y-4">
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
-                            <input type="text" id="cat-nombre" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ej: BEBIDAS, SNACKS"/>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Descripción</label>
-                            <input type="text" id="cat-desc" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Opcional"/>
-                        </div>
-                        <div id="cat-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-                        <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                            <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Crear</button>
-                        </div>
-                    </form>
-                </div>
-            `);
-
-            document.getElementById("nueva-categoria-form").addEventListener("submit", async (e) => {
-                e.preventDefault();
-                const nombre = document.getElementById("cat-nombre").value;
-                const description = document.getElementById("cat-desc").value;
-
-                try {
-                    const response = await fetch(`${API_URL}/api/categorias`, {
-                        method: "POST",
-                        headers: getHeaders(),
-                        body: JSON.stringify({ nombre, description })
-                    });
-                    if (response.ok) {
-                        cerrarModal();
-                        renderView("catalogo");
-                    } else {
-                        const err = await response.json();
-                        document.getElementById("cat-error").innerText = err.message || "Error al crear la categoría.";
-                        document.getElementById("cat-error").classList.remove("hidden");
-                    }
-                } catch (err) {
-                    alert("Error de conexión.");
-                }
-            });
-        }
-
-        function mostrarModalNuevoProducto() {
-            abrirModal(`
-                <div class="bg-surface-container border border-outline-variant w-full max-w-md rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                    <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                        <h3 class="font-bold text-on-surface text-lg">Nuevo Producto</h3>
-                        <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                    </div>
-                    <form id="nuevo-producto-form" class="p-lg space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">SKU (Código)</label>
-                                <input type="text" id="prod-sku" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="780123..."/>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
-                                <input type="text" id="prod-nombre" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ej: Inca Kola 1.5L"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Descripción</label>
-                            <input type="text" id="prod-desc" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ej: Botella No Retornable"/>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Precio Venta (S/)</label>
-                                <input type="number" step="0.01" id="prod-precio" min="0.0" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Stock Mínimo (Alerta)</label>
-                                <input type="number" id="prod-stock-min" min="0" value="10" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Categoría</label>
-                            <select id="prod-categoria" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                <option value="">-- Seleccione Categoría --</option>
-                                ${state.categorias.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('')}
-                            </select>
-                        </div>
-                        <div id="prod-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-                        <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                            <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Crear</button>
-                        </div>
-                    </form>
-                </div>
-            `);
-
-            document.getElementById("nuevo-producto-form").addEventListener("submit", async (e) => {
-                e.preventDefault();
-                const sku = document.getElementById("prod-sku").value;
-                const nombre = document.getElementById("prod-nombre").value;
-                const descripcion = document.getElementById("prod-desc").value;
-                const precio = parseFloat(document.getElementById("prod-precio").value);
-                const stockMinimo = parseInt(document.getElementById("prod-stock-min").value);
-                const categoriaId = parseInt(document.getElementById("prod-categoria").value);
-
-                try {
-                    const response = await fetch(`${API_URL}/api/productos`, {
-                        method: "POST",
-                        headers: getHeaders(),
-                        body: JSON.stringify({ sku, nombre, descripcion, precio, stockMinimo, categoriaId })
-                    });
-                    if (response.ok) {
-                        cerrarModal();
-                        renderView("catalogo");
-                    } else {
-                        const err = await response.json();
-                        document.getElementById("prod-error").innerText = err.message || "Error al crear el producto.";
-                        document.getElementById("prod-error").classList.remove("hidden");
-                    }
-                } catch (err) {
-                    alert("Error de conexión.");
-                }
-            });
-        }
-
-        function mostrarModalEditarProducto(id, sku, nombre, descripcion, precio, stockMinimo, categoriaId) {
-            abrirModal(`
-                <div class="bg-surface-container border border-outline-variant w-full max-w-md rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                    <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                        <h3 class="font-bold text-on-surface text-lg">Editar Producto</h3>
-                        <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                    </div>
-                    <form id="editar-producto-form" class="p-lg space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">SKU (Código)</label>
-                                <input type="text" id="prod-sku" value="${sku}" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
-                                <input type="text" id="prod-nombre" value="${nombre}" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Descripción</label>
-                            <input type="text" id="prod-desc" value="${descripcion || ''}" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Precio Venta (S/)</label>
-                                <input type="number" step="0.01" id="prod-precio" value="${precio}" min="0.0" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Stock Mínimo (Alerta)</label>
-                                <input type="number" id="prod-stock-min" value="${stockMinimo}" min="0" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none text-center"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Categoría</label>
-                            <select id="prod-categoria" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none">
-                                ${state.categorias.map(c => `<option value="${c.id}" ${c.id == categoriaId ? 'selected' : ''}>${c.nombre}</option>`).join('')}
-                            </select>
-                        </div>
-                        <div id="prod-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-                        <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                            <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Actualizar</button>
-                        </div>
-                    </form>
-                </div>
-            `);
-
-            document.getElementById("editar-producto-form").addEventListener("submit", async (e) => {
-                e.preventDefault();
-                const sku = document.getElementById("prod-sku").value;
-                const nombre = document.getElementById("prod-nombre").value;
-                const descripcion = document.getElementById("prod-desc").value;
-                const precio = parseFloat(document.getElementById("prod-precio").value);
-                const stockMinimo = parseInt(document.getElementById("prod-stock-min").value);
-                const categoriaId = parseInt(document.getElementById("prod-categoria").value);
-
-                try {
-                    const response = await fetch(`${API_URL}/api/productos/${id}`, {
-                        method: "PUT",
-                        headers: getHeaders(),
-                        body: JSON.stringify({ sku, nombre, descripcion, precio, stockMinimo, categoriaId })
-                    });
-                    if (response.ok) {
-                        cerrarModal();
-                        renderView("catalogo");
-                    } else {
-                        const err = await response.json();
-                        document.getElementById("prod-error").innerText = err.message || "Error al actualizar el producto.";
-                        document.getElementById("prod-error").classList.remove("hidden");
-                    }
-                } catch (err) {
-                    alert("Error de conexión.");
+                if (res.ok) {
+                    cerrarModal();
+                    renderView("productos");
+                } else {
+                    alert("Error al guardar el producto.");
                 }
             });
         }
 
         async function eliminarProducto(id) {
-            if (!confirm("¿Está seguro de eliminar este producto del catálogo?")) return;
-            try {
-                const res = await fetch(`${API_URL}/api/productos/${id}`, {
-                    method: "DELETE",
-                    headers: getHeaders()
-                });
-                if (res.ok) {
-                    renderView("catalogo");
-                } else {
-                    const err = await res.json();
-                    alert(err.message || "No se pudo eliminar el producto.");
-                }
-            } catch (err) {
-                alert("Error al eliminar.");
+            if (!confirm("¿Está seguro de eliminar este producto? (Se dará de baja lógica)")) return;
+            const res = await fetch(`${API_URL}/admin/productos/${id}`, {
+                method: "DELETE",
+                headers: getHeaders()
+            });
+            if (res.ok) {
+                renderView("productos");
+            } else {
+                alert("Error al eliminar el producto.");
             }
         }
 
-        // 7. MODALES: SUCURSALES (CRUD)
-        function mostrarModalNuevaSucursal() {
-            abrirModal(`
-                <div class="bg-surface-container border border-outline-variant w-full max-w-sm rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                    <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                        <h3 class="font-bold text-on-surface text-lg">Nueva Sucursal</h3>
-                        <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                    </div>
-                    <form id="nueva-sucursal-form" class="p-lg space-y-4">
+        // MODAL PEDIDO (EMPLEADO)
+        function abrirModalPedido(id) {
+            const prod = state.productos.find(p => p.id === id);
+            const modal = document.getElementById("modal-container");
+
+            modal.innerHTML = `
+                <div class="w-full max-w-sm bg-surface-container border border-outline-variant p-6 rounded-xl space-y-4">
+                    <h3 class="text-lg font-bold text-primary">Registrar Pedido</h3>
+                    <p class="text-xs text-on-surface-variant">Producto: <b class="text-on-surface">${prod.nombre}</b> (Stock: ${prod.stock} u.)</p>
+                    <form id="modal-pedido-form" class="space-y-3">
                         <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
-                            <input type="text" id="suc-nombre" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ej: Tambo Miraflores 02"/>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Cantidad a Comprar</label>
+                            <input type="number" id="m-o-cantidad" min="1" max="${prod.stock}" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="1"/>
                         </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Dirección</label>
-                            <input type="text" id="suc-dir" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Av. Larco 456, Miraflores"/>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Teléfono</label>
-                            <input type="text" id="suc-tel" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ej: 01-5556677"/>
-                        </div>
-                        <div id="suc-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-                        <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                            <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Crear</button>
+                        <div class="flex justify-end gap-2 pt-4">
+                            <button type="button" onclick="cerrarModal()" class="border border-outline-variant/65 text-on-surface-variant px-4 py-2 rounded text-xs hover:bg-white/5 transition-colors">Cancelar</button>
+                            <button type="submit" class="bg-primary text-on-primary font-bold px-4 py-2 rounded text-xs hover:opacity-90">Registrar Venta</button>
                         </div>
                     </form>
                 </div>
-            `);
+            `;
+            modal.classList.remove("hidden");
 
-            document.getElementById("nueva-sucursal-form").addEventListener("submit", async (e) => {
+            document.getElementById("modal-pedido-form").addEventListener("submit", async (e) => {
                 e.preventDefault();
-                const nombre = document.getElementById("suc-nombre").value;
-                const direccion = document.getElementById("suc-dir").value;
-                const telefono = document.getElementById("suc-tel").value;
+                const cant = parseInt(document.getElementById("m-o-cantidad").value);
+                const data = {
+                    productoId: prod.id,
+                    cantidad: cant
+                };
 
-                try {
-                    const response = await fetch(`${API_URL}/api/sucursales`, {
-                        method: "POST",
-                        headers: getHeaders(),
-                        body: JSON.stringify({ nombre, direccion, telefono })
-                    });
-                    if (response.ok) {
-                        cerrarModal();
-                        cargarDatosMaestros().then(() => renderView("sucursales"));
-                    } else {
-                        const err = await response.json();
-                        document.getElementById("suc-error").innerText = err.message || "Error al crear la sucursal.";
-                        document.getElementById("suc-error").classList.remove("hidden");
-                    }
-                } catch (err) {
-                    alert("Error.");
+                const res = await fetch(`${API_URL}/api/pedidos`, {
+                    method: "POST",
+                    headers: getHeaders(),
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    cerrarModal();
+                    renderView("productos");
+                } else {
+                    const err = await res.json();
+                    alert("Error: " + (err.message || "No se pudo registrar el pedido."));
                 }
             });
         }
 
-        function mostrarModalEditarSucursal(id, nombre, direccion, telefono) {
-            abrirModal(`
-                <div class="bg-surface-container border border-outline-variant w-full max-w-sm rounded-xl overflow-hidden shadow-2xl flex flex-col">
-                    <div class="px-lg py-md bg-[#161616] border-b border-outline-variant flex justify-between items-center">
-                        <h3 class="font-bold text-on-surface text-lg">Editar Sucursal</h3>
-                        <button onclick="cerrarModal()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined">close</span></button>
-                    </div>
-                    <form id="editar-sucursal-form" class="p-lg space-y-4">
+        // MODAL USUARIO (ADMIN)
+        function abrirModalUsuario(id = null) {
+            const u = id ? state.usuarios.find(user => user.id === id) : null;
+            const modal = document.getElementById("modal-container");
+
+            modal.innerHTML = `
+                <div class="w-full max-w-md bg-surface-container border border-outline-variant p-6 rounded-xl space-y-4">
+                    <h3 class="text-lg font-bold text-primary">${u ? 'Editar Usuario' : 'Registrar Nuevo Usuario'}</h3>
+                    <form id="modal-usuario-form" class="space-y-3">
                         <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Nombre</label>
-                            <input type="text" id="suc-nombre" value="${nombre}" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Nombre Completo</label>
+                            <input type="text" id="m-u-nombre" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="${u ? u.nombre : ''}"/>
                         </div>
                         <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Dirección</label>
-                            <input type="text" id="suc-dir" value="${direccion}" required class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Correo Electrónico</label>
+                            <input type="email" id="m-u-correo" required class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface" value="${u ? u.correo : ''}"/>
                         </div>
                         <div>
-                            <label class="block text-xs font-label-sm uppercase tracking-wider text-on-surface-variant mb-1">Teléfono</label>
-                            <input type="text" id="suc-tel" value="${telefono}" class="w-full bg-[#161616] border border-outline-variant rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:outline-none"/>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Username</label>
+                            <input type="text" id="m-u-username" required ${u ? 'readonly' : ''} class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface ${u ? 'opacity-50' : ''}" value="${u ? u.username : ''}"/>
                         </div>
-                        <div id="suc-error" class="hidden p-3 bg-error-container/20 border border-error/50 rounded text-error text-xs"></div>
-                        <div class="flex justify-end gap-3 border-t border-outline-variant/30 pt-4">
-                            <button type="button" onclick="cerrarModal()" class="px-4 py-2 border border-outline-variant rounded text-sm hover:bg-surface-container-high">Cancelar</button>
-                            <button type="submit" class="px-4 py-2 bg-primary text-on-primary rounded font-bold text-sm hover:opacity-90">Actualizar</button>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Password ${u ? '(Dejar vacío para mantener actual)' : ''}</label>
+                            <input type="password" id="m-u-pass" ${u ? '' : 'required'} class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface"/>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Rol</label>
+                            <select id="m-u-rol" class="w-full bg-[#161616] border border-outline-variant rounded p-2 text-xs focus:ring-1 focus:ring-primary text-on-surface">
+                                <option value="ROLE_USER" ${u && u.roles.includes('ROLE_USER') ? 'selected' : ''}>USER (Empleado)</option>
+                                <option value="ROLE_ADMIN" ${u && u.roles.includes('ROLE_ADMIN') ? 'selected' : ''}>ADMIN (Administrador)</option>
+                            </select>
+                        </div>
+                        <div class="flex justify-end gap-2 pt-4">
+                            <button type="button" onclick="cerrarModal()" class="border border-outline-variant/65 text-on-surface-variant px-4 py-2 rounded text-xs hover:bg-white/5 transition-colors">Cancelar</button>
+                            <button type="submit" class="bg-primary text-on-primary font-bold px-4 py-2 rounded text-xs hover:opacity-90">Guardar</button>
                         </div>
                     </form>
                 </div>
-            `);
+            `;
+            modal.classList.remove("hidden");
 
-            document.getElementById("editar-sucursal-form").addEventListener("submit", async (e) => {
+            document.getElementById("modal-usuario-form").addEventListener("submit", async (e) => {
                 e.preventDefault();
-                const nombre = document.getElementById("suc-nombre").value;
-                const direccion = document.getElementById("suc-dir").value;
-                const telefono = document.getElementById("suc-tel").value;
+                const data = {
+                    nombre: document.getElementById("m-u-nombre").value,
+                    correo: document.getElementById("m-u-correo").value,
+                    username: document.getElementById("m-u-username").value,
+                    password: document.getElementById("m-u-pass").value,
+                    roles: [document.getElementById("m-u-rol").value]
+                };
 
-                try {
-                    const response = await fetch(`${API_URL}/api/sucursales/${id}`, {
-                        method: "PUT",
-                        headers: getHeaders(),
-                        body: JSON.stringify({ nombre, direccion, telefono })
-                    });
-                    if (response.ok) {
-                        cerrarModal();
-                        cargarDatosMaestros().then(() => renderView("sucursales"));
-                    } else {
-                        const err = await response.json();
-                        document.getElementById("suc-error").innerText = err.message || "Error al actualizar la sucursal.";
-                        document.getElementById("suc-error").classList.remove("hidden");
-                    }
-                } catch (err) {
-                    alert("Error.");
+                const url = u ? `${API_URL}/usuarios/${u.id}` : `${API_URL}/usuarios`;
+                const method = u ? "PUT" : "POST";
+
+                const res = await fetch(url, {
+                    method: method,
+                    headers: getHeaders(),
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    cerrarModal();
+                    renderView("usuarios");
+                } else {
+                    const err = await res.json();
+                    alert("Error: " + (err.message || "No se pudo guardar el usuario."));
                 }
             });
         }
 
-        async function eliminarSucursal(id) {
-            if (!confirm("¿Está seguro de eliminar esta sucursal? Se verificará que no tenga empleados asociados.")) return;
-            try {
-                const res = await fetch(`${API_URL}/api/sucursales/${id}`, {
-                    method: "DELETE",
-                    headers: getHeaders()
-                });
-                if (res.ok) {
-                    cargarDatosMaestros().then(() => renderView("sucursales"));
-                } else {
-                    const err = await res.json();
-                    alert(err.message || "No se pudo eliminar la sucursal.");
-                }
-            } catch (err) {
-                alert("Error.");
+        async function eliminarUsuario(id) {
+            if (!confirm("¿Está seguro de eliminar este usuario?")) return;
+            const res = await fetch(`${API_URL}/usuarios/${id}`, {
+                method: "DELETE",
+                headers: getHeaders()
+            });
+            if (res.ok) {
+                renderView("usuarios");
+            } else {
+                alert("Error al eliminar el usuario.");
             }
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById("modal-container");
+            modal.classList.add("hidden");
+            modal.innerHTML = "";
         }
     </script>
 </body>
