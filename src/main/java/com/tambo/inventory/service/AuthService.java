@@ -72,7 +72,7 @@ public class AuthService {
                 userPrincipal.getUsername(),
                 userPrincipal.getNombre(),
                 roles,
-                1L // Sucessfully authenticated, send a mock sucursalId to not break the frontend expectation
+                1L 
         );
     }
 

@@ -51,11 +51,9 @@ public class PedidoService {
             throw new BadRequestException("Stock insuficiente para el producto '" + producto.getNombre() + "'. Stock disponible: " + producto.getStock());
         }
 
-        // Descontar stock
         producto.setStock(producto.getStock() - dto.getCantidad());
         productoRepository.save(producto);
 
-        // Calcular total
         BigDecimal total = producto.getPrecio().multiply(BigDecimal.valueOf(dto.getCantidad()));
 
         Pedido pedido = new Pedido();

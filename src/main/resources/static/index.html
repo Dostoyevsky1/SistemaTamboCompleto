@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Sistema Tambo - Control de Inventario Simplificado</title>
+    <title>Sistema Tambo</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -50,7 +50,6 @@
 </head>
 <body class="overflow-hidden h-screen bg-[#0e0e0e] text-sm">
 
-    <!-- ==================== PANTALLA DE LOGIN ==================== -->
     <div id="login-container" class="flex items-center justify-center min-h-screen bg-[#0e0e0e] px-4">
         <div class="w-full max-w-md bg-surface-container border border-outline-variant p-8 rounded-xl shadow-2xl space-y-6">
             <div class="text-center">
@@ -73,15 +72,9 @@
                     Iniciar Sesión
                 </button>
             </form>
-            <div class="text-center pt-2 border-t border-outline-variant/30 space-y-1">
-                <p class="text-xs text-on-surface-variant/80">Cuentas por defecto:</p>
-                <p class="text-[11px] text-on-surface-variant">Admin: <span class="font-bold text-secondary-container">admin / admin123</span></p>
-                <p class="text-[11px] text-on-surface-variant">Empleado: <span class="font-bold text-secondary-container">empleado / empleado123</span></p>
-            </div>
         </div>
     </div>
 
-    <!-- ==================== APLICACIÓN PRINCIPAL ==================== -->
     <div id="app-container" class="hidden flex h-screen overflow-hidden">
         
         <!-- SIDEBAR DE NAVEGACIÓN -->
@@ -118,10 +111,8 @@
             </div>
         </aside>
 
-        <!-- CONTENEDOR DE PÁGINAS -->
         <div class="flex-1 flex flex-col overflow-hidden bg-background">
             
-            <!-- HEADER TOPBAR -->
             <header class="flex justify-between items-center h-16 px-8 bg-surface border-b border-outline-variant sticky top-0 z-40">
                 <div id="search-container" class="flex items-center flex-1 max-w-md">
                     <div class="relative w-full">
@@ -130,31 +121,30 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <!-- Eliminado AVANCE_SIMPLIFICADO_V1 -->
                 </div>
             </header>
 
-            <!-- PORT RENDER SPA -->
             <main class="flex-1 overflow-y-auto p-8 custom-scrollbar" id="view-port">
-                <!-- Se renderiza con JS -->
             </main>
         </div>
     </div>
 
-    <!-- ==================== MODALES ==================== -->
     <div id="modal-container" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <!-- El contenido se inyectará dinámicamente -->
     </div>
 
-    <!-- ==================== LOGICA JAVASCRIPT ==================== -->
     <script>
         const API_URL = "";
 
+        localStorage.removeItem("jwt_token");
+        localStorage.removeItem("jwt_username");
+        localStorage.removeItem("jwt_nombre");
+        localStorage.removeItem("jwt_roles");
+
         const state = {
-            token: localStorage.getItem("jwt_token") || null,
-            username: localStorage.getItem("jwt_username") || null,
-            nombre: localStorage.getItem("jwt_nombre") || null,
-            roles: JSON.parse(localStorage.getItem("jwt_roles")) || [],
+            token: sessionStorage.getItem("jwt_token") || null,
+            username: sessionStorage.getItem("jwt_username") || null,
+            nombre: sessionStorage.getItem("jwt_nombre") || null,
+            roles: JSON.parse(sessionStorage.getItem("jwt_roles")) || [],
             currentView: "productos",
             productos: [],
             pedidos: [],
@@ -195,7 +185,6 @@
         }
 
         function initEvents() {
-            // Login Form
             document.getElementById("login-form").addEventListener("submit", async (e) => {
                 e.preventDefault();
                 const username = document.getElementById("login-username").value;
@@ -216,10 +205,10 @@
                         state.nombre = data.nombre;
                         state.roles = data.roles;
 
-                        localStorage.setItem("jwt_token", data.token);
-                        localStorage.setItem("jwt_username", data.username);
-                        localStorage.setItem("jwt_nombre", data.nombre);
-                        localStorage.setItem("jwt_roles", JSON.stringify(data.roles));
+                        sessionStorage.setItem("jwt_token", data.token);
+                        sessionStorage.setItem("jwt_username", data.username);
+                        sessionStorage.setItem("jwt_nombre", data.nombre);
+                        sessionStorage.setItem("jwt_roles", JSON.stringify(data.roles));
 
                         checkAuth();
                     } else {
@@ -230,7 +219,6 @@
                 }
             });
 
-            // Logout Button
             document.getElementById("logout-btn").addEventListener("click", () => {
                 state.token = null;
                 state.username = null;
@@ -238,15 +226,14 @@
                 state.roles = [];
                 state.currentView = "productos";
 
-                localStorage.removeItem("jwt_token");
-                localStorage.removeItem("jwt_username");
-                localStorage.removeItem("jwt_nombre");
-                localStorage.removeItem("jwt_roles");
+                sessionStorage.removeItem("jwt_token");
+                sessionStorage.removeItem("jwt_username");
+                sessionStorage.removeItem("jwt_nombre");
+                sessionStorage.removeItem("jwt_roles");
 
                 checkAuth();
             });
 
-            // Sidebar navigation
             document.querySelectorAll("#nav-links a").forEach(link => {
                 link.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -293,7 +280,6 @@
             }
         }
 
-        // ==================== VISTA PRODUCTOS ====================
         async function renderProductos(container) {
             try {
                 const res = await fetch(`${API_URL}/api/productos`, { headers: getHeaders() });
@@ -389,7 +375,6 @@
             }
         }
 
-        // ==================== VISTA PEDIDOS ====================
         async function renderPedidos(container) {
             try {
                 const res = await fetch(`${API_URL}/api/pedidos`, { headers: getHeaders() });
@@ -439,7 +424,6 @@
             }
         }
 
-        // ==================== VISTA USUARIOS (ADMIN) ====================
         async function renderUsuarios(container) {
             try {
                 const res = await fetch(`${API_URL}/usuarios`, { headers: getHeaders() });
@@ -497,9 +481,6 @@
             }
         }
 
-        // ==================== EVENTOS Y ENVIOS DE INFORMACION ====================
-        
-        // MODAL PRODUCTO (ADMIN)
         function abrirModalProducto(id = null) {
             const prod = id ? state.productos.find(p => p.id === id) : null;
             const modal = document.getElementById("modal-container");
@@ -575,7 +556,6 @@
             }
         }
 
-        // MODAL PEDIDO (EMPLEADO)
         function abrirModalPedido(id) {
             const prod = state.productos.find(p => p.id === id);
             const modal = document.getElementById("modal-container");
@@ -622,7 +602,6 @@
             });
         }
 
-        // MODAL USUARIO (ADMIN)
         function abrirModalUsuario(id = null) {
             const u = id ? state.usuarios.find(user => user.id === id) : null;
             const modal = document.getElementById("modal-container");
