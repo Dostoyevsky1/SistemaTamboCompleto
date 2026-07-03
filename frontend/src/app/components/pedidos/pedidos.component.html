@@ -1,0 +1,38 @@
+<!-- Comunicación: Mapea la lista de pedidos de PedidosComponent a una tabla de Tailwind CSS utilizando la directiva estructural *ngFor y filtros para formato de fecha y moneda -->
+<div class="max-w-6xl mx-auto space-y-6 font-sans">
+  <div>
+    <h2 class="text-2xl font-bold text-[#e5e2e1]">Historial de Pedidos</h2>
+    <p class="text-[#cfc2d5] text-xs mt-1">Registro cronológico de las compras de productos del inventario.</p>
+  </div>
+
+  <div class="bg-[#1c1c1c] border border-[#4c4353]/30 rounded-xl overflow-hidden shadow-lg">
+    <table class="w-full text-left border-collapse">
+      <thead class="bg-[#242424] border-b border-[#4c4353]/30 text-xs font-bold uppercase tracking-wider text-[#cfc2d5]">
+        <tr>
+          <th class="px-6 py-4">ID</th>
+          <th class="px-6 py-4">Empleado/Usuario</th>
+          <th class="px-6 py-4">Producto</th>
+          <th class="px-6 py-4 text-center">Cantidad</th>
+          <th class="px-6 py-4">Fecha</th>
+          <th class="px-6 py-4 text-right">Total</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-[#4c4353]/20 text-xs text-[#cfc2d5]">
+        <tr *ngFor="let p of pedidos" class="hover:bg-white/5 transition-colors">
+          <td class="px-6 py-4 font-mono font-bold text-[#deb7ff]">#{{ p.id }}</td>
+          <td class="px-6 py-4 font-semibold">{{ p.usuarioNombre }}</td>
+          <td class="px-6 py-4 font-bold text-[#e5e2e1]">{{ p.productoNombre }}</td>
+          <td class="px-6 py-4 text-center font-mono">{{ p.cantidad }} u.</td>
+          <td class="px-6 py-4 text-[#cfc2d5]">{{ p.fecha | date:'dd/MM/yyyy, h:mm:ss a' }}</td>
+          <td class="px-6 py-4 text-right font-mono font-bold text-[#ffc300]">S/ {{ p.total | number:'1.2-2' }}</td>
+        </tr>
+        
+        <tr *ngIf="pedidos.length === 0">
+          <td colspan="6" class="px-6 py-8 text-center text-[#cfc2d5]">
+            No se han registrado pedidos aún.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

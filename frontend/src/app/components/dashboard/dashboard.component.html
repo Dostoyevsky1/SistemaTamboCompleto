@@ -1,0 +1,78 @@
+<!-- Comunicación: Plantilla de Layout. Vincula la navegación asíncrona mediante routerLink, renderiza vistas en router-outlet y enlaza la barra de búsqueda con onSearch() -->
+<div class="flex h-screen overflow-hidden font-sans text-sm bg-[#0e0e0e] text-[#e5e2e1]">
+  <aside class="w-[260px] bg-[#131313] border-r border-[#4c4353] flex flex-col py-6 z-50">
+    <div class="px-6 mb-8">
+      <h1 class="text-2xl font-bold text-[#deb7ff] tracking-tight">Sistema Tambo</h1>
+      <p class="text-[#cfc2d5] opacity-70 text-xs">Panel Operativo</p>
+    </div>
+    
+    <nav class="flex-1 space-y-1">
+      <a 
+        routerLink="/dashboard/productos" 
+        routerLinkActive="text-[#deb7ff] bg-[#7b2cbf]/10 border-r-2 border-[#deb7ff]" 
+        [routerLinkActiveOptions]="{exact: false}"
+        class="flex items-center gap-3 px-6 py-3 text-[#cfc2d5] hover:bg-[#201f1f]/50 transition-colors"
+      >
+        <span class="material-symbols-outlined">inventory_2</span>
+        <span>Productos</span>
+      </a>
+      
+      <a 
+        routerLink="/dashboard/pedidos" 
+        routerLinkActive="text-[#deb7ff] bg-[#7b2cbf]/10 border-r-2 border-[#deb7ff]" 
+        class="flex items-center gap-3 px-6 py-3 text-[#cfc2d5] hover:bg-[#201f1f]/50 transition-colors"
+      >
+        <span class="material-symbols-outlined">shopping_cart</span>
+        <span>Pedidos</span>
+      </a>
+      
+      <a 
+        *ngIf="isAdmin"
+        routerLink="/dashboard/usuarios" 
+        routerLinkActive="text-[#deb7ff] bg-[#7b2cbf]/10 border-r-2 border-[#deb7ff]" 
+        class="flex items-center gap-3 px-6 py-3 text-[#cfc2d5] hover:bg-[#201f1f]/50 transition-colors"
+      >
+        <span class="material-symbols-outlined">group</span>
+        <span>Usuarios (Admin)</span>
+      </a>
+    </nav>
+    
+    <div class="px-6 mt-auto pt-6 border-t border-[#4c4353]/30 space-y-3">
+      <div class="flex items-center gap-3 p-2 rounded">
+        <div class="w-8 h-8 rounded-full bg-[#deb7ff]/20 flex items-center justify-center text-[#deb7ff] font-bold">
+          {{ avatarLetra }}
+        </div>
+        <div>
+          <p class="font-bold text-[#e5e2e1] text-xs">{{ nombreUsuario }}</p>
+          <p class="text-[10px] text-[#cfc2d5]">{{ rolUsuario }}</p>
+        </div>
+      </div>
+      <button 
+        (click)="logout()" 
+        class="w-full flex items-center justify-center gap-2 py-2 border border-[#4c4353]/50 rounded text-xs text-[#ffb4ab] hover:bg-[#ffb4ab]/10 transition-colors cursor-pointer"
+      >
+        <span class="material-symbols-outlined text-sm">logout</span> 
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="flex-1 flex flex-col overflow-hidden bg-[#0e0e0e]">
+    <header class="flex justify-between items-center h-16 px-8 bg-[#131313] border-b border-[#4c4353] sticky top-0 z-40">
+      <div class="flex items-center flex-1 max-w-md">
+        <div *ngIf="isRouteActive('/dashboard/productos')" class="relative w-full">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#cfc2d5] text-[20px]">search</span>
+          <input 
+            (input)="onSearch($event)"
+            class="w-full bg-[#201f1f] border-none rounded-lg pl-10 pr-4 py-1.5 text-xs focus:ring-1 focus:ring-[#deb7ff] placeholder-[#cfc2d5]/50 transition-all text-[#e5e2e1]" 
+            placeholder="Buscar productos por nombre..."
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
