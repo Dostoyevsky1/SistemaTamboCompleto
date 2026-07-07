@@ -23,6 +23,9 @@ public class ProductoDTO {
     @Min(value = 0, message = "El stock no puede ser negativo")
     private Integer stock;
 
+    private Long sucursalId;
+    private String sucursalNombre;
+
     public ProductoDTO() {
     }
 
@@ -32,6 +35,16 @@ public class ProductoDTO {
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
+    }
+
+    public ProductoDTO(Long id, String nombre, String descripcion, BigDecimal precio, Integer stock, Long sucursalId, String sucursalNombre) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+        this.sucursalId = sucursalId;
+        this.sucursalNombre = sucursalNombre;
     }
 
     public Long getId() {
@@ -72,5 +85,21 @@ public class ProductoDTO {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Long getSucursalId() {
+        return sucursalId;
+    }
+
+    public void setSucursalId(Long sucursalId) {
+        this.sucursalId = sucursalId;
+    }
+
+    public String getSucursalNombre() {
+        return sucursalNombre;
+    }
+
+    public void setSucursalNombre(String sucursalNombre) {
+        this.sucursalNombre = sucursalNombre;
     }
 }

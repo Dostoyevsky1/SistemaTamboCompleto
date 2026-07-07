@@ -22,14 +22,21 @@ public class ProductoController {
     }
 
     @GetMapping("/api/productos")
-    public ResponseEntity<List<ProductoDTO>> listarProductos() {
-        List<ProductoDTO> productos = productoService.listarActivos();
+    public ResponseEntity<List<ProductoDTO>> listarProductos(@RequestParam(value = "sucursalId", required = false) Long sucursalId) {
+        List<ProductoDTO> productos;
+        if (sucursalId != null) {
+            productos = productoService.listarPorSucursal(sucursalId);
+        } else {
+            productos = productoService.listarActivos();
+        }
         return ResponseEntity.ok(productos);
     }
 
     @GetMapping("/api/productos/buscar")
-    public ResponseEntity<List<ProductoDTO>> buscarProductos(@RequestParam("nombre") String nombre) {
-        List<ProductoDTO> productos = productoService.buscarPorNombre(nombre);
+    public ResponseEntity<List<ProductoDTO>> buscarProductos(
+            @RequestParam("nombre") String nombre,
+            @RequestParam(value = "sucursalId", required = false) Long sucursalId) {
+        List<ProductoDTO> productos = productoService.buscarPorNombreYSucursal(nombre, sucursalId);
         return ResponseEntity.ok(productos);
     }
 

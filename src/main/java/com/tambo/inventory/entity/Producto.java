@@ -26,6 +26,10 @@ public class Producto {
     @Column(nullable = false)
     private Boolean activo = true;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sucursal_id", nullable = true)
+    private Sucursal sucursal;
+
     public Producto() {
     }
 
@@ -87,5 +91,13 @@ public class Producto {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 }

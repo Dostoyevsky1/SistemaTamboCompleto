@@ -1,0 +1,86 @@
+<!-- Comunicación: Muestra KPIs consolidados y gráfico de productos más vendidos consumiendo los datos agregados por InicioComponent -->
+<div class="max-w-6xl mx-auto space-y-6 font-sans">
+  <div>
+    <h2 class="text-2xl font-bold text-[#e5e2e1]">Resumen de Operaciones</h2>
+    <p class="text-[#cfc2d5] text-xs mt-1">Monitoreo de sucursal, KPIs financieros y estado crítico de stock.</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-[#1c1c1c] border border-[#4c4353]/30 rounded-xl p-5 shadow-md flex items-center justify-between">
+      <div class="space-y-1">
+        <p class="text-[10px] text-[#cfc2d5] uppercase tracking-wider font-semibold">Ventas Totales</p>
+        <p class="text-2xl font-extrabold text-[#ffc300] font-mono">S/ {{ stats.totalVentas | number:'1.2-2' }}</p>
+      </div>
+      <div class="p-3 rounded-lg bg-[#7b2cbf]/10 border border-[#deb7ff]/10">
+        <span class="material-symbols-outlined text-[#deb7ff] text-2xl">payments</span>
+      </div>
+    </div>
+
+    <div class="bg-[#1c1c1c] border border-[#4c4353]/30 rounded-xl p-5 shadow-md flex items-center justify-between">
+      <div class="space-y-1">
+        <p class="text-[10px] text-[#cfc2d5] uppercase tracking-wider font-semibold">Productos Registrados</p>
+        <p class="text-2xl font-extrabold text-[#e5e2e1] font-mono">{{ stats.cantidadProductos }}</p>
+      </div>
+      <div class="p-3 rounded-lg bg-[#7b2cbf]/10 border border-[#deb7ff]/10">
+        <span class="material-symbols-outlined text-[#deb7ff] text-2xl">inventory</span>
+      </div>
+    </div>
+
+    <div 
+      class="bg-[#1c1c1c] border rounded-xl p-5 shadow-md flex items-center justify-between transition-colors"
+      [ngClass]="stats.bajoStockCount > 0 ? 'border-red-500/40 bg-red-950/5' : 'border-[#4c4353]/30'"
+    >
+      <div class="space-y-1">
+        <p class="text-[10px] uppercase tracking-wider font-semibold" [ngClass]="stats.bajoStockCount > 0 ? 'text-red-400' : 'text-[#cfc2d5]'">
+          Stock Crítico
+        </p>
+        <p class="text-2xl font-extrabold font-mono" [ngClass]="stats.bajoStockCount > 0 ? 'text-red-400 animate-pulse' : 'text-[#e5e2e1]'">
+          {{ stats.bajoStockCount }} alertas
+        </p>
+      </div>
+      <div class="p-3 rounded-lg" [ngClass]="stats.bajoStockCount > 0 ? 'bg-red-500/10 border border-red-500/20' : 'bg-[#7b2cbf]/10 border border-[#deb7ff]/10'">
+        <span class="material-symbols-outlined text-2xl" [ngClass]="stats.bajoStockCount > 0 ? 'text-red-400' : 'text-[#deb7ff]'">warning</span>
+      </div>
+    </div>
+
+    <div class="bg-[#1c1c1c] border border-[#4c4353]/30 rounded-xl p-5 shadow-md flex items-center justify-between">
+      <div class="space-y-1">
+        <p class="text-[10px] text-[#cfc2d5] uppercase tracking-wider font-semibold">Usuarios Activos</p>
+        <p class="text-2xl font-extrabold text-[#e5e2e1] font-mono">{{ stats.usuariosActivos }}</p>
+      </div>
+      <div class="p-3 rounded-lg bg-[#7b2cbf]/10 border border-[#deb7ff]/10">
+        <span class="material-symbols-outlined text-[#deb7ff] text-2xl">group</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 bg-[#1c1c1c] border border-[#4c4353]/30 rounded-xl p-6 shadow-md space-y-6">
+      <div>
+        <h3 class="text-lg font-bold text-[#e5e2e1]">Productos más vendidos</h3>
+        <p class="text-xs text-[#cfc2d5] mt-1">Ranking de productos según la cantidad de unidades despachadas en la sucursal.</p>
+      </div>
+
+      <div *ngIf="stats.topProductos && stats.topProductos.length > 0; else noData" class="space-y-4 pt-2">
+        <div *ngFor="let p of stats.topProductos" class="space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="font-bold text-[#e5e2e1]">{{ p.nombre }}</span>
+            <span class="font-mono text-[#deb7ff] font-bold">{{ p.cantidadVendida }} unidades</span>
+          </div>
+          <div class="w-full bg-[#161616] h-3 rounded-full overflow-hidden">
+            <div 
+              class="h-full bg-gradient-to-r from-[#7b2cbf] to-[#deb7ff] rounded-full transition-all duration-1000"
+              [style.width.%]="getPorcentajeBarra(p.cantidadVendida)"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noData>
+        <div class="py-12 text-center text-xs text-[#cfc2d5]">
+          <span class="material-symbols-outlined text-4xl opacity-30 mb-2 block">leaderboard</span>
+          No hay suficientes datos de ventas para generar el gráfico en esta sucursal.
+        </div>
+      </ng-template>
+    </div>
+      </div>
+    </div>
