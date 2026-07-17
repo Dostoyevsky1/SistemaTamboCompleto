@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from '../config/api-config';
 
 export interface TopProducto {
   nombre: string;
@@ -20,7 +21,7 @@ export interface DashboardStats {
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:8080/api/dashboard/stats';
+  private apiUrl = `${API_BASE_URL}/api/dashboard/stats`;
 
   constructor(private http: HttpClient) {}
 

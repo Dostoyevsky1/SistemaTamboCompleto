@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from '../config/api-config';
 
 export interface Pedido {
   id?: number;
@@ -18,7 +19,7 @@ export interface Pedido {
   providedIn: 'root'
 })
 export class PedidoService {
-  private apiUrl = 'http://localhost:8080/api/pedidos';
+  private apiUrl = `${API_BASE_URL}/api/pedidos`;
 
   constructor(private http: HttpClient) {}
 

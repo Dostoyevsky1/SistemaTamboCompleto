@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { API_BASE_URL } from '../config/api-config';
 
 export interface Producto {
   id?: number;
@@ -18,8 +19,8 @@ export interface Producto {
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiPublicUrl = 'http://localhost:8080/api/productos';
-  private apiAdminUrl = 'http://localhost:8080/admin/productos';
+  private apiPublicUrl = `${API_BASE_URL}/api/productos`;
+  private apiAdminUrl = `${API_BASE_URL}/admin/productos`;
 
   private searchSubject = new BehaviorSubject<string>('');
   searchQuery$ = this.searchSubject.asObservable();

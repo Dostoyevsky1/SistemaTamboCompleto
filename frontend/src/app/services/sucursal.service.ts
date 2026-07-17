@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { API_BASE_URL } from '../config/api-config';
 
 export interface Sucursal {
   id: number;
@@ -13,7 +14,7 @@ export interface Sucursal {
   providedIn: 'root'
 })
 export class SucursalService {
-  private apiUrl = 'http://localhost:8080/api/sucursales';
+  private apiUrl = `${API_BASE_URL}/api/sucursales`;
 
   private sucursalSeleccionadaSubject = new BehaviorSubject<number | null>(null);
   sucursalSeleccionada$ = this.sucursalSeleccionadaSubject.asObservable();
