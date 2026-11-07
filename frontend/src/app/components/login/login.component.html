@@ -39,7 +39,7 @@
             type="text" 
             formControlName="username" 
             class="w-full bg-[#161616] border border-[#4c4353] rounded-lg px-4 py-2.5 text-[#e5e2e1] focus:outline-none focus:ring-1 focus:ring-[#deb7ff] focus:border-[#deb7ff] transition-all" 
-            placeholder="Introduce tu usuario"
+            placeholder="admin"
             [class.border-red-500]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
           />
           <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-red-400 text-xs mt-1">
@@ -54,7 +54,7 @@
             type="password" 
             formControlName="password" 
             class="w-full bg-[#161616] border border-[#4c4353] rounded-lg px-4 py-2.5 text-[#e5e2e1] focus:outline-none focus:ring-1 focus:ring-[#deb7ff] focus:border-[#deb7ff] transition-all" 
-            placeholder="••••••••"
+            placeholder="admin123"
             [class.border-red-500]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
           />
           <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-400 text-xs mt-1">
@@ -74,7 +74,7 @@
       </form>
 
       <div class="text-center pt-4 border-t border-[#4c4353]/30">
-        <p class="text-xs text-[#cfc2d5]/60 font-medium">Acceso exclusivo para personal autorizado.</p>
+        <p class="text-xs text-[#cfc2d5]/80 font-medium">Acceso de demostración: admin / admin123</p>
       </div>
     </div>
   </div>
